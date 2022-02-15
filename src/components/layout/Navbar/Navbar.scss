@@ -1,0 +1,75 @@
+@import '../../../scss/main';
+
+.nav_bar{
+  display: flex;
+  flex-direction: column;
+  &__elements{
+    background-color: #1D1E1C;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__logo{
+      width: 130px;
+      position: relative;
+      top: 20px;
+      left: 10px;
+    }
+    &__links{
+      display: none;
+    }
+    &__links_mob{
+      font-size: 2.2rem;
+      color: $light-color;
+      display: flex;
+      gap: 32px;
+      padding: 0 20px;
+      cursor: pointer;
+    }
+  }
+  &__routes{
+    background-color: $light-color;
+    height: 40px;
+    font-family: $primary-font;
+    font-weight: 700;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 40px;
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .nav_bar{
+    &__elements{
+      &__logo{
+        width: 160px;
+      }
+      &__links{
+        font-family: $primary-font;
+        font-size: 2rem;
+        font-weight: 600;
+        color: $light-color;
+        display: flex;
+        gap: 50px;
+        padding: 0 25px;
+        span{
+          cursor: pointer;
+        }
+        :hover{
+          text-shadow: 3px 3px 2px rgba($sucess-color, 1);
+          
+        }
+        &--login{
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+      &__links_mob{
+        display: none;
+      }
+    }
+  }
+}

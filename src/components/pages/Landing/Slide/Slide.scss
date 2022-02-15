@@ -1,0 +1,106 @@
+@import '../../../../scss/main';
+
+.slide {
+  width: 90%;
+  
+  margin: 40px auto;
+  overflow: hidden;
+  position: relative; 
+  
+  &__content{
+    width: 300%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0rem;
+    transition: all .5s ease;
+    
+    &.state1{
+      transform: translateX(0%);
+    }
+    &.state2{
+      transform: translateX(calc(-100%/3));
+    }
+    &.state3{
+      transform: translateX(calc(-2*100%/3));
+    }
+    &__img{
+      width: calc(100%/3);
+      img{
+        width: 100%;
+        height: 270px;
+        object-fit: cover;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+  &__controls{
+    display: flex;
+    position: absolute;
+    bottom: 50%;
+    left: 20px;
+    right: 20px;
+    justify-content: space-between;
+    align-items: center;
+    &__backwards{
+      background-color: rgba($dark-color,0.5);
+      width: 25px;
+      height: 25px;
+      border-radius: 12.5px;
+      color: $light-color;
+      &:hover {
+        background-color: rgba($dark-color,0.8);
+      }
+    }
+    &__forwards{
+      background-color: rgba($dark-color,0.5);
+      width: 25px;
+      height: 25px;
+      border-radius: 12.5px;
+      color: $light-color;
+      &:hover {
+        background-color: rgba($dark-color,0.8);
+      }
+    }
+  }
+  &__dots{
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    left: 25%;
+    right: 25%;
+    justify-content: center;
+    align-items: center;
+    &__dot{
+      width: 1rem;
+      height: 1rem;
+      margin: 1rem;
+      border-radius: 1rem;
+      border: 2px solid rgba($light-color,0.7);
+      &:hover {
+        border: 2px solid rgba($light-color,1);
+      }
+      &.active1{
+          background-color: rgba($light-color,0.7);
+          &:hover {
+            background-color: rgba($light-color,1);
+          }
+      }
+    }
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .slide {
+    width: 80%;
+    max-width: 1000px;
+    &__content{
+      &__img{
+        img{
+          height: 400px;
+        }
+      }
+    }
+  }
+}

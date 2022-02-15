@@ -1,0 +1,90 @@
+@import '../../../scss/main';
+
+.footer{
+  background-color: $dark-color;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  padding: 0 40px;
+  &__CBD{
+    display: none;
+  }
+  &__THC{
+    display: none;
+  }
+  &__description{
+    font-family: $primary-font;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: $light-color;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    &__info{
+      display: flex;
+      justify-content: space-between;
+      &__data{
+        padding-top: 13px;
+        display: flex;
+        flex-direction: column;
+        width: 122px;
+      }
+      &__leaf{
+        display: none;
+      }
+      &__social{
+        padding-top: 13px;
+        display: flex;
+        flex-direction: column;
+        width: 122px;
+        text-align: end;
+        padding-right: 25px;
+        &--networks{
+          font-size: 2.5rem;
+          padding-top: 10px;
+          display: flex;
+          justify-content: flex-end;
+          gap:10px;
+        }
+      }
+    }
+    &__contact{
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      text-align: center;
+      padding-bottom: 5px;
+    }
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .footer{
+    justify-content: space-between;
+    padding: 0 80px;
+    &__CBD{
+      display: block;
+      width: 140px;
+      height:fit-content;
+      align-self: center;
+    }
+    &__THC{
+      display: block;
+      width: 140px;
+      height:fit-content;
+      align-self: center;
+    }
+    &__description{
+      &__info{
+        &__social{
+          padding-right: 45px;
+        }
+        &__leaf{
+          display: block;
+          width: 80px;
+        }
+      }
+    }
+  }
+
+}
