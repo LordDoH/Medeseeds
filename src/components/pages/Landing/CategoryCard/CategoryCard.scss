@@ -1,0 +1,33 @@
+@import '../../../../scss/main';
+
+.category_card{
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  height: 210px;
+  font-size: $secondary-font-size;
+  font-weight: normal;
+  text-align: start;
+  position: relative;
+  border-radius: 10px;
+  &__img{
+    width: 170px;
+    height: 170px;
+    object-fit: cover;
+    margin: 0 auto;
+    border: 1px solid $boring-color;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+    &:hover{
+      box-shadow: none;
+    }
+  }
+  &__title{
+    font-size: 1.4rem;
+    font-family: $primary-font;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $dark-color;
+    text-align: start;
+    padding: 10px;
+  }
+}

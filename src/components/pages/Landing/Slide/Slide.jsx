@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import './Slide.scss';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+
+import Slide1 from '../../../../assets/images/Slide1.jpg';
+import Slide2 from '../../../../assets/images/Slide2.jpg';
+import Slide3 from '../../../../assets/images/Slide3.jpg';
+
+function Slide() {
+  const [dot, setDot] = useState(1);
+  const arrImage = [1, 2, 3];
+  const [active, setActive] = useState([1, 0, 0]);
+
+  const onClickDot = (e) => {
+    const prevActive = new Array(arrImage.length).fill(0);
+    prevActive[e - 1] = 1;
+    setActive(prevActive);
+    setDot(e);
+  };
+
+  const onClickForward = () => {
+    if (dot < arrImage.length) {
+      const newdot = dot + 1;
+      const prevActive = new Array(arrImage.length).fill(0);
+      prevActive[dot] = 1;
+      setActive(prevActive);
+      setDot(newdot);
+    } else {
+      setDot(1);
+      const prevActive = new Array(arrImage.length).fill(0);
+      prevActive[0] = 1;
+      setActive(prevActive);
+    }
+  };
+
+  const onClickBackward = () => {
+    if (dot > 1) {
+      const newdot = dot - 1;
+      const prevActive = new Array(arrImage.length).fill(0);
+      prevActive[dot - (arrImage.length - 1)] = 1;
+      setActive(prevActive);
+      setDot(newdot);
+    } else {
+      setDot(arrImage.length);
+      const prevActive = new Array(arrImage.length).fill(0);
+      prevActive[arrImage.length - 1] = 1;
+      setActive(prevActive);
+    }
+  };
+
+  return (
+    <div className="slide">
+      <div className={`slide__content state${dot}`}>
+        <div className="slide__content__img">
+          <img src={Slide1} alt="SlideImage" />
+        </div>
+        <div className="slide__content__img">
+          <img src={Slide2} alt="SlideImage2" />
+        </div>
+        <div className="slide__content__img">
+          <img src={Slide3} alt="SlideImage3" />
+        </div>
+      </div>
+
+      <div className="slide__dots">
+        {arrImage.map((e) => (
+          // eslint-disable-next-line
+          <div key={`dotSlide${e}`}
+            className={`slide__dots__dot active${active[e - 1]}`}
+            onClick={() => onClickDot(e)}
+          />
+        ))}
+      </div>
+
+      <div className="slide__controls">
+        {/* eslint-disable-next-line */}
+        <IoIosArrowBack className="slide__controls__backwards" onClick={onClickBackward}/>
+
+        {/* eslint-disable-next-line */}
+        <IoIosArrowForward className="slide__controls__forwards" onClick={onClickForward}/>
+      </div>
+    </div>
+  );
+}
+
+export default Slide;

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+$primary-color : #1D1E1C;
+$secondary-color : #666666;
+$sucess-color : #739D38;
+$alert-color : #C2001B;
+$boring-color : #AAAAAA;
+$dark-color : #333333;
+$light-color : #EFEFEF;
+$warning-color : #FF8900;
+
+$primary-font : 'Ubuntu', sans-serif;
+$secondary-font : 'Roboto', sans-serif;
+
+$primary-font-size : 3.6rem;
+$secondary-font-size : 1.8rem;
+
+$bp_mobile: 768px;
+$bp_tablet: 992px;
+
+html {
+  font-size: 62.5%;
+  min-height: 100vh;
+
+}
+
+ul {
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+*::-webkit-scrollbar:vertical {
+  width:10px;
+
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color:  $dark-color;
+}
+
+*::-webkit-scrollbar-track {
+  background:$light-color ;
+}
+
+body {
+  font-family: $secondary-font;
+  font-size: $secondary-font-size;
+}
+
+#root{
+  min-height: 100vh;
+}
