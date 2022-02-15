@@ -6,6 +6,7 @@ import App from '../App';
 import Landing from '../components/pages/Landing/Landing';
 import Categories from '../components/pages/Categories/Categories';
 import Products from '../components/pages/Products/Products';
+import P404 from '../components/pages/P404/P404';
 
 function Router() {
   return (
@@ -14,7 +15,7 @@ function Router() {
         <Route path="/" element={<Landing />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/any" element={<Products />} />
-        <Route path="*" element={<Products />} />
+        <Route path="*" element={<P404 />} />
       </Route>
     </Routes>
   );

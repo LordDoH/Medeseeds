@@ -124,7 +124,8 @@
 @media(min-width:$bp_tablet){
   .landing{
     &__allied_cards{
-      gap: 1rem;
+      width: 60%;
+      gap: 2rem;
     }
   }
 }
