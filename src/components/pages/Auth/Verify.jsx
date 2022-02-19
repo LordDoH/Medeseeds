@@ -33,7 +33,7 @@ function Verify() {
       setLoading(false);
       setTimeout(() => {
         navigate('/');
-      }, 10000);
+      }, 3000);
     } catch (error) {
       // console.log(error);
     }
