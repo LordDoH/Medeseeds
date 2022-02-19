@@ -58,13 +58,28 @@
           cursor: pointer;
         }
         :hover{
-          text-shadow: 3px 3px 2px rgba($sucess-color, 1);
-          
+          text-shadow: 2px 2px 2px rgba($sucess-color, 1);
+        }
+        &Link{
+          text-decoration: none;
+        }
+        &__location{
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+          &.true{
+            padding-top: 15px;
+            color: $boring-color;
+            text-shadow: none;
+          }
         }
         &--login{
           display: flex;
           align-items: center;
           gap: 10px;
+          cursor: pointer
         }
       }
       &__links_mob{
