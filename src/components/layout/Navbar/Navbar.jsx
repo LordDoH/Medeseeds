@@ -153,6 +153,7 @@ function Navbar() {
                 onClick={() => {
                   loginWithRedirect();
                 }}
+                className="nav_bar__elements__links_mob__cart"
               >
                 <IoMdPerson />
               </div>
