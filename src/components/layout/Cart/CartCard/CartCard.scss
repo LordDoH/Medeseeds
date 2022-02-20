@@ -1,0 +1,107 @@
+@import '../../../../scss/main';
+
+.cart_card{
+  font-size: 1.8rem;
+  color: $dark-color;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 20px 0;
+  &__pricing{
+    display: flex;
+    flex-direction: column;
+    &__quantity{
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 25px 20px 20px 20px;
+      &__btn{
+        font-size: 3rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: $sucess-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding-bottom: 4px;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+      }
+      &__text{
+        font-size: 2 rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: $light-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+    &__remove{
+      color: $alert-color;
+      font-weight: normal;
+      font-size: 1.4rem;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    &__text{
+      padding-top: 4rem;
+      font-size: 2.5rem;
+      color: $light-color;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    &__total{
+      padding-top: 4rem;
+      font-size: 2rem;
+      font-weight: normal;
+      color: $light-color;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .cart_card{
+    width: 450px;
+    gap: 2rem;
+    padding: 20px 0;
+    font-size: 1.8rem;
+    top: 115px;
+    right: 20px;
+    &__pricing{
+      &__quantity{
+        gap: 2rem;
+        padding: 40px 20px 20px 20px;
+        &__btn{
+          font-size: 4rem;
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+          padding-bottom: 5px;
+        }
+        &__text{
+          font-size: 2.5rem;
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+        }
+      }
+      &__remove{
+        font-size: 1.8rem;
+      }
+      &__text{
+        padding-top: 7rem;
+        font-size: 3rem;
+      }
+      &__total{
+        padding-top: 4.5rem;
+        font-size: 2.5rem;
+      }
+  
+    }
+  }
+}
