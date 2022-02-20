@@ -1,0 +1,22 @@
+@import '../../../scss/main';
+
+.login_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 90px;
+  font-size: 1.6rem;
+  font-family: $secondary-font;
+  font-weight: 700;
+  border: none;
+  background-color: $dark-color;
+  color: $light-color;
+  border-radius: 5px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+  margin: 40px 0;
+  cursor: pointer;
+  &:hover{
+    box-shadow: none;
+  }
+}
