@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useLazyQuery, gql } from '@apollo/client';
 import { MdSearch, MdOutlineShoppingCart } from 'react-icons/md';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actions from '../../../store/action';
 import ProfileButton from './ProfileBtn/ProfileButton';
 import BurgerMenu from './BurguerMenu/BurgerMenu';
+import Cart from '../Cart/Cart';
 
 import LogoMed from '../../../assets/images/LogoMed.png';
 import './Navbar.scss';
@@ -81,75 +82,97 @@ function Navbar() {
   // extract user
   const currentUser = useSelector((state) => state.currentUser);
 
+  // Cart deploy function
+  const dropdownRef = useRef(null);
+
+  const [isActive, setIsActive] = useState(false);
+
+  const onClick2 = () => setIsActive(!isActive);
+
   return (
-    <div className="nav_bar">
-      <div className="nav_bar__elements">
-        <img className="nav_bar__elements__logo" src={LogoMed} alt="Logo" />
-        <div className="nav_bar__elements__links">
-          <Link
-            to="/"
-            onClick={onClick}
-            className={`nav_bar__elements__links__location ${active[0]}`}
-          >
-            HOME
+    <div>
+      <div className="nav_bar">
+        <div className="nav_bar__elements">
+          <Link to="/" onClick={onClick}>
+            <img className="nav_bar__elements__logo" src={LogoMed} alt="Logo" />
           </Link>
-          <Link
-            to="/categories"
-            onClick={onClick}
-            className={`nav_bar__elements__links__location ${active[1]}`}
-          >
-            PRODUCTS
-          </Link>
-          <Link
-            to="/learn"
-            onClick={onClick}
-            className={`nav_bar__elements__links__location ${active[2]}`}
-          >
-            LEARN
-          </Link>
-          <Link
-            to="/about"
-            onClick={onClick}
-            className={`nav_bar__elements__links__location ${active[3]}`}
-          >
-            ABOUT
-          </Link>
-          {/* eslint-disable-next-line */}
-          {!isAuth?(<div
-              onClick={() => {
-                loginWithRedirect();
-              }}
-              className="nav_bar__elements__links--login"
+          <div className="nav_bar__elements__links">
+            <Link
+              to="/"
+              onClick={onClick}
+              className={`nav_bar__elements__links__location ${active[0]}`}
             >
-              <IoMdPerson />
-              LOGIN
+              HOME
+            </Link>
+            <Link
+              to="/categories"
+              onClick={onClick}
+              className={`nav_bar__elements__links__location ${active[1]}`}
+            >
+              PRODUCTS
+            </Link>
+            <Link
+              to="/learn"
+              onClick={onClick}
+              className={`nav_bar__elements__links__location ${active[2]}`}
+            >
+              LEARN
+            </Link>
+            <Link
+              to="/about"
+              onClick={onClick}
+              className={`nav_bar__elements__links__location ${active[3]}`}
+            >
+              ABOUT
+            </Link>
+            {/* eslint-disable-next-line */}
+          {!isAuth?(<div
+                onClick={() => {
+                  loginWithRedirect();
+                }}
+                className="nav_bar__elements__links--login"
+              >
+                <IoMdPerson />
+                LOGIN
+              </div>
+            ) : (
+              <ProfileButton currentUser={currentUser} />
+            )}
+            {/* eslint-disable-next-line */}
+            <div onClick={onClick2} className="nav_bar__elements__links__location">
+              <MdOutlineShoppingCart />
             </div>
-          ) : (
-            <ProfileButton currentUser={currentUser} />
-          )}
-          {/* eslint-disable-next-line */}
-          <div className="nav_bar__elements__links__location" onClick={onClick}>
-            <MdOutlineShoppingCart />
+          </div>
+          <div className="nav_bar__elements__links_mob">
+            <MdSearch />
+            {/* eslint-disable-next-line */}
+          {!isAuth?(<div
+                onClick={() => {
+                  loginWithRedirect();
+                }}
+              >
+                <IoMdPerson />
+              </div>
+            ) : (
+              <ProfileButton currentUser={currentUser} />
+            )}
+            <div
+              onClick={onClick2}
+              className="nav_bar__elements__links_mob__cart"
+            >
+              <MdOutlineShoppingCart />
+            </div>
+            <BurgerMenu />
           </div>
         </div>
-        <div className="nav_bar__elements__links_mob">
-          <MdSearch />
-          {/* eslint-disable-next-line */}
-          {!isAuth?(<div
-              onClick={() => {
-                loginWithRedirect();
-              }}
-            >
-              <IoMdPerson />
-            </div>
-          ) : (
-            <ProfileButton currentUser={currentUser} />
-          )}
-          <MdOutlineShoppingCart />
-          <BurgerMenu />
-        </div>
+        <div className="nav_bar__routes">Welcome</div>
       </div>
-      <div className="nav_bar__routes">Welcome</div>
+      <div
+        className={`nav_bar__menu ${isActive ? 'active' : null}`}
+        ref={dropdownRef}
+      >
+        <Cart />
+      </div>
     </div>
   );
 }
