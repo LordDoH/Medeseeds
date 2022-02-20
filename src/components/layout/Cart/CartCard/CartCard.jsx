@@ -46,7 +46,7 @@ function CartCard({ product }) {
         }
       }
     }
-    console.log(productsS);
+    // console.log(productsS);
   };
 
   const addProduct = () => {
@@ -79,6 +79,7 @@ function CartCard({ product }) {
 
   return (
     <div className="cart_card">
+      {productsS ? 'Hola' : null}
       <ProductCart product={product} />
       <div className="cart_card__pricing">
         <div className="cart_card__pricing__quantity">
