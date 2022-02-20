@@ -70,6 +70,9 @@ function Navbar() {
       if (isAuthenticated === false) {
         dispatch(actions.closeSesion());
       }
+      // if (!localStorage.getItem('token')) {
+      //   dispatch(actions.closeSesion());
+      // }
     }
   }, [isLoading]);
 
@@ -150,6 +153,7 @@ function Navbar() {
                 onClick={() => {
                   loginWithRedirect();
                 }}
+                className="nav_bar__elements__links_mob__cart"
               >
                 <IoMdPerson />
               </div>
