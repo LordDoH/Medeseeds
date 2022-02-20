@@ -11,18 +11,70 @@ function CartCard({ product }) {
     minimumFractionDigits: 0,
   });
 
+  const productsToken = JSON.parse(localStorage.getItem('products'));
+
+  const [productsS, setProductsS] = useState(productsToken);
+
   const priceCurrency = formatterPeso.format(product.price * quantity);
+
+  const getProduct = (e) => e.product === product.title;
 
   const reduceProduct = () => {
     if (quantity > 1) {
       const less = quantity - 1;
       setQuantity(less);
+      if (localStorage.getItem('products')) {
+        let products = JSON.parse(localStorage.getItem('products'));
+        if (products.find(getProduct)) {
+          products.find(getProduct).quantity =
+            products.find(getProduct).quantity - 1;
+          setProductsS(products);
+          products = JSON.stringify(products);
+          localStorage.setItem('products', products);
+        }
+      }
     }
+    if (quantity === 1) {
+      if (localStorage.getItem('products')) {
+        let products = JSON.parse(localStorage.getItem('products'));
+        if (products.find(getProduct)) {
+          const indexP = products.findIndex(getProduct);
+          products.splice(indexP, 1);
+          setProductsS(products);
+          products = JSON.stringify(products);
+          localStorage.setItem('products', products);
+        }
+      }
+    }
+    console.log(productsS);
   };
 
   const addProduct = () => {
     const plus = quantity + 1;
     setQuantity(plus);
+    if (localStorage.getItem('products')) {
+      let products = JSON.parse(localStorage.getItem('products'));
+      if (products.find(getProduct)) {
+        products.find(getProduct).quantity =
+          products.find(getProduct).quantity + 1;
+        setProductsS(products);
+        products = JSON.stringify(products);
+        localStorage.setItem('products', products);
+      }
+    }
+  };
+
+  const removeProduct = () => {
+    if (localStorage.getItem('products')) {
+      let products = JSON.parse(localStorage.getItem('products'));
+      if (products.find(getProduct)) {
+        const indexP = products.findIndex(getProduct);
+        products.splice(indexP, 1);
+        setProductsS(products);
+        products = JSON.stringify(products);
+        localStorage.setItem('products', products);
+      }
+    }
   };
 
   return (
@@ -44,7 +96,9 @@ function CartCard({ product }) {
             +
           </div>
         </div>
-        <div className="cart_card__pricing__remove">Remove</div>
+        <div className="cart_card__pricing__remove" onClick={removeProduct}>
+          Remove
+        </div>
         <div className="cart_card__pricing__text">Subtotal</div>
         <div className="cart_card__pricing__total">{priceCurrency}</div>
       </div>
