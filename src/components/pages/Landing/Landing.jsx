@@ -11,7 +11,6 @@ import LearnCard from './LearnCard/LearnCard';
 import BranchCard from './BranchCard/BranchCard';
 import Slide1 from '../../../assets/images/Slide1.jpg';
 import Slide2 from '../../../assets/images/Slide2.jpg';
-import LoginBtn from '../../layout/Login/LoginBtn';
 
 function Landing() {
   const scrollUp = () => {
@@ -106,7 +105,6 @@ function Landing() {
 
   return (
     <div className="landing">
-      <LoginBtn />
       <Slide />
       <div className="landing__top">Top Products</div>
       <div className="landing__top_cards">

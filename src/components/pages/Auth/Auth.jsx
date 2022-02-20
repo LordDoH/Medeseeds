@@ -32,9 +32,7 @@ const USER_BY_TOKEN = gql`
       name
       role
       id
-      orders {
-        order
-      }
+      photo
     }
   }
 `;
@@ -92,7 +90,7 @@ function Auth() {
         setVerif(true);
         setTimeout(() => {
           navigate('/');
-        }, 5000);
+        }, 1500);
       } catch (error) {
         // console.log(error);
         setLoading(false);

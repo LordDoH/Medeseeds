@@ -1,0 +1,55 @@
+@import '../../../../scss/main';
+
+.profile_menu{
+  list-style: none;
+  padding: 0;
+  text-shadow: none;
+  &__item{
+    border-bottom: 1px solid #666;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+    color: $light-color;
+    font-family: $primary-font;
+    padding: 15px 15px;
+    font-size: 16px;
+    &__img{
+      width: 50px;
+      height: 50px;
+      border-radius: 25px;
+      margin: 0px;
+      object-fit: cover;
+      object-position: center center;
+    }
+    &__text{
+      text-decoration: none;
+      color: inherit;
+      padding: 0 15px;
+      text-shadow: none;
+    }
+    &__text2{
+      text-decoration: none;
+      color: inherit;
+      text-shadow: none;
+    }
+    &__icon{
+      padding-left: 15px;
+      font-size: 20px;
+      color: $sucess-color;
+    }
+    &__btn{
+      padding: 0 15px;
+      text-decoration: none;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      font-family: $primary-font;
+      font-size: 16px;
+      font-weight: 700;
+      color: inherit;
+      text-shadow: none;
+    }
+  }
+
+}

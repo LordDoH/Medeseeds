@@ -1,14 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { MdSearch, MdOutlineMenu, MdOutlineShoppingCart } from 'react-icons/md';
+import { useLazyQuery, gql } from '@apollo/client';
+import { MdSearch, MdOutlineShoppingCart } from 'react-icons/md';
 import { IoMdPerson } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from '../../../store/action';
+import ProfileButton from './ProfileBtn/ProfileButton';
+import BurgerMenu from './BurguerMenu/BurgerMenu';
 
 import LogoMed from '../../../assets/images/LogoMed.png';
 import './Navbar.scss';
 
+const USER_BY_TOKEN = gql`
+  query getUserByToken($token: String!) {
+    getUserByToken(token: $token) {
+      email
+      name
+      role
+      id
+      photo
+    }
+  }
+`;
+
 function Navbar() {
+  // Actual page functionality
   const [active, setActive] = useState([true, false, false, false]);
+
   const [mov, setMov] = useState(true);
   const onClick = async () => {
     setMov(!mov);
@@ -27,7 +46,40 @@ function Navbar() {
     }
   }, [mov]);
 
+  // Load user data in any page
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  const [getUser] = useLazyQuery(USER_BY_TOKEN, {
+    variables: { token: localStorage.getItem('token') },
+  });
+  const dispatch = useDispatch();
+
+  useEffect(async () => {
+    if (isAuthenticated) {
+      if (localStorage.getItem('token')) {
+        try {
+          const response = await getUser();
+          dispatch(actions.obtainedUser(response.data.getUserByToken));
+        } catch (error) {
+          // console.log(error);
+        }
+      }
+    }
+    if (isLoading === false) {
+      if (isAuthenticated === false) {
+        dispatch(actions.closeSesion());
+      }
+    }
+  }, [isLoading]);
+
+  // function of login button
   const { loginWithRedirect } = useAuth0();
+
+  // extract userAuthenticated
+  const isAuth = useSelector((state) => state.userAuthenticated);
+
+  // extract user
+  const currentUser = useSelector((state) => state.currentUser);
 
   return (
     <div className="nav_bar">
@@ -63,15 +115,18 @@ function Navbar() {
             ABOUT
           </Link>
           {/* eslint-disable-next-line */}
-          <div
-            onClick={() => {
-              loginWithRedirect();
-            }}
-            className="nav_bar__elements__links--login"
-          >
-            <IoMdPerson />
-            LOGIN
-          </div>
+          {!isAuth?(<div
+              onClick={() => {
+                loginWithRedirect();
+              }}
+              className="nav_bar__elements__links--login"
+            >
+              <IoMdPerson />
+              LOGIN
+            </div>
+          ) : (
+            <ProfileButton currentUser={currentUser} />
+          )}
           {/* eslint-disable-next-line */}
           <div className="nav_bar__elements__links__location" onClick={onClick}>
             <MdOutlineShoppingCart />
@@ -79,9 +134,19 @@ function Navbar() {
         </div>
         <div className="nav_bar__elements__links_mob">
           <MdSearch />
-          <IoMdPerson />
+          {/* eslint-disable-next-line */}
+          {!isAuth?(<div
+              onClick={() => {
+                loginWithRedirect();
+              }}
+            >
+              <IoMdPerson />
+            </div>
+          ) : (
+            <ProfileButton currentUser={currentUser} />
+          )}
           <MdOutlineShoppingCart />
-          <MdOutlineMenu />
+          <BurgerMenu />
         </div>
       </div>
       <div className="nav_bar__routes">Welcome</div>

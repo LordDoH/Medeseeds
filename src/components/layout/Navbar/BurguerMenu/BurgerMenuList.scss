@@ -1,0 +1,17 @@
+@import '../../../../scss/main';
+
+.brgr_menu{
+  &__item{
+    list-style: none;
+    border-bottom: 1px solid #666;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+    justify-content: center;
+    font-family: $primary-font;
+    font-size: 1.6rem;
+    color: $light-color;
+    text-decoration: none;
+  }
+}

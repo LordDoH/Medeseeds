@@ -1,0 +1,35 @@
+@import '../../../../scss/main';
+
+.brgr_menubtn{
+  &__btn{
+    font-size: 3rem;
+    cursor: pointer;
+    margin-left: auto;
+    color: $light-color;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    :hover {
+      color: $boring-color;
+    }
+  }
+  &__deploy{
+    background-color: $dark-color;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-45px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+    z-index: 200;
+    &.active{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(45px);
+    }
+  }
+}
