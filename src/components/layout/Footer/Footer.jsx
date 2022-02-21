@@ -28,8 +28,12 @@ function Footer() {
           <div className="footer__description__info__social">
             <span>Follow us:</span>
             <span className="footer__description__info__social--networks">
-              <GrInstagram />
-              <GrFacebook />
+              <a href="https://www.instagram.com/mede_seeds/">
+                <GrInstagram />
+              </a>
+              <a href="https://web.facebook.com/MedeSeeeds">
+                <GrFacebook />
+              </a>
             </span>
           </div>
         </div>

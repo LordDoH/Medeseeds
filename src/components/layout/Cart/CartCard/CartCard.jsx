@@ -40,7 +40,6 @@ function CartCard({ product }) {
     }
     if (quantity === 1) {
       if (localStorage.getItem('products')) {
-        console.log('encontrado');
         let products = JSON.parse(localStorage.getItem('products'));
         if (products.find(getProduct)) {
           const indexP = products.findIndex(getProduct);
