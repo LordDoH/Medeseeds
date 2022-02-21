@@ -9,6 +9,7 @@ import Products from '../components/pages/Products/Products';
 import P404 from '../components/pages/P404/P404';
 import Auth from '../components/pages/Auth/Auth';
 import Verify from '../components/pages/Auth/Verify';
+import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
 
 function Router() {
   return (
@@ -17,8 +18,20 @@ function Router() {
         <Route path="/" element={<Landing />} />
         <Route path="/activate/:hash" element={<Verify />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/profile" element={<Landing />} />
+        <Route path="/learn" element={<Landing />} />
+        <Route path="/learn/:post" element={<Landing />} />
+        <Route path="/orderresume" element={<Landing />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/categories/any" element={<Products />} />
+        <Route path="/categories/create" element={<Categories />} />
+        <Route path="/categories/edit" element={<Categories />} />
+        <Route path="/categories/:category" element={<Products />} />
+        <Route path="/categories/:category/create" element={<Products />} />
+        <Route path="/categories/:category/edit" element={<Products />} />
+        <Route
+          path="/categories/:category/:productId"
+          element={<ProductDetail />}
+        />
         <Route path="*" element={<P404 />} />
       </Route>
     </Routes>

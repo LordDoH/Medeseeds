@@ -70,9 +70,6 @@ function Navbar() {
       if (isAuthenticated === false) {
         dispatch(actions.closeSesion());
       }
-      // if (!localStorage.getItem('token')) {
-      //   dispatch(actions.closeSesion());
-      // }
     }
   }, [isLoading]);
 

@@ -1,25 +1,15 @@
 import React from 'react';
 
 import ProductCard from '../Landing/ProductCard/ProductCard';
-import BranchCard from '../Landing/BranchCard/BranchCard';
+
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import Termo from '../../../assets/images/Termo.png';
-import Topcrop from '../../../assets/images/Topcrop.png';
+
 import './Products.scss';
+import Allied from '../../layout/Allied/Allied';
 
 function Products() {
-  const fakeBranchData = [
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-  ];
-
   const fakeProductData = [
     {
       image: Termo,
@@ -81,12 +71,7 @@ function Products() {
       </button>
       <DeliveryPolicy />
       <GuaranteePolicy />
-      <div className="products__allied">Allied Branches</div>
-      <div className="products__allied_cards">
-        {fakeBranchData.map((e) => (
-          <BranchCard image={e.image} />
-        ))}
-      </div>
+      <Allied />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 import './ProductCard.scss';
+import { useDispatch } from 'react-redux';
+import actions from '../../../../store/action';
 
 function ProductCard({ image, brand, title, price }) {
   const formatterPeso = new Intl.NumberFormat('es-CO', {
@@ -8,6 +10,10 @@ function ProductCard({ image, brand, title, price }) {
     currency: 'COP',
     minimumFractionDigits: 0,
   });
+
+  // const cartState = useSelector((state) => state.cartState);
+
+  const dispatch = useDispatch();
 
   const shortTitle = title.length > 40 ? `${title.slice(0, 40)}...` : title;
 
@@ -17,9 +23,10 @@ function ProductCard({ image, brand, title, price }) {
 
   const onClick = () => {
     if (!localStorage.getItem('products')) {
-      let products = [{ product: title, quantity: 1 }];
+      let products = [{ title, unit_price: price, quantity: 1 }];
       products = JSON.stringify(products);
       localStorage.setItem('products', products);
+      dispatch(actions.loadedCart(products));
     } else if (localStorage.getItem('products')) {
       let products = JSON.parse(localStorage.getItem('products'));
       if (products.find(getProduct)) {
@@ -27,10 +34,12 @@ function ProductCard({ image, brand, title, price }) {
           products.find(getProduct).quantity + 1;
         products = JSON.stringify(products);
         localStorage.setItem('products', products);
+        dispatch(actions.loadedCart(products));
       } else {
-        let products2 = [{ product: title, quantity: 1 }];
-        products2 = JSON.stringify(products2);
-        localStorage.setItem('products', products2);
+        products.push({ title, quantity: 1 });
+        products = JSON.stringify(products);
+        localStorage.setItem('products', products);
+        dispatch(actions.loadedCart(products));
       }
     }
   };

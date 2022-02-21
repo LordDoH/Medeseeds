@@ -1,4 +1,5 @@
 import {
+  LOAD_CART,
   EDIT_ANSWER,
   EDIT_POST,
   EDIT_CATEGORY,
@@ -11,6 +12,10 @@ import {
 } from './types';
 
 // action creators
+const loadCart = (product) => ({
+  type: LOAD_CART,
+  payload: product,
+});
 const editAnswer = (answer) => ({
   type: EDIT_ANSWER,
   payload: answer,
@@ -47,6 +52,14 @@ const logOut = () => ({
   type: LOGOUT,
   payload: false,
 });
+
+const loadedCart = (response) => async (dispatch) => {
+  try {
+    dispatch(loadCart(response));
+  } catch (e) {
+    // console.log(e)
+  }
+};
 
 const editedAnswer = (response) => async (dispatch) => {
   try {
@@ -120,6 +133,7 @@ const closeSesion = () => async (dispatch) => {
 };
 
 export default {
+  loadedCart,
   editedAnswer,
   editedPost,
   editedCategory,

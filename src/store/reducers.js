@@ -1,5 +1,6 @@
 /* eslint-disable default-param-last */
 import {
+  LOAD_CART,
   EDIT_ANSWER,
   EDIT_POST,
   EDIT_CATEGORY,
@@ -12,6 +13,7 @@ import {
 } from './types';
 
 const initialState = {
+  cartState: {},
   editAnswer: {},
   editPost: {},
   editProduct: {},
@@ -26,6 +28,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
   switch (action.type) {
+    case LOAD_CART:
+      return { ...state, cartState: newValue };
     case EDIT_ANSWER:
       return { ...state, editAnswer: newValue };
     case EDIT_POST:

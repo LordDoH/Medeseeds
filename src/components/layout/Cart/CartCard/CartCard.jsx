@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import './CartCard.scss';
+import { useDispatch } from 'react-redux';
 import ProductCart from './ProductCart/ProductCart';
+import actions from '../../../../store/action';
 
 function CartCard({ product }) {
   const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useDispatch();
 
   const formatterPeso = new Intl.NumberFormat('es-CO', {
     style: 'currency',
@@ -17,7 +21,7 @@ function CartCard({ product }) {
 
   const priceCurrency = formatterPeso.format(product.price * quantity);
 
-  const getProduct = (e) => e.product === product.title;
+  const getProduct = (e) => e.title === product.title;
 
   const reduceProduct = () => {
     if (quantity > 1) {
@@ -36,13 +40,16 @@ function CartCard({ product }) {
     }
     if (quantity === 1) {
       if (localStorage.getItem('products')) {
+        console.log('encontrado');
         let products = JSON.parse(localStorage.getItem('products'));
         if (products.find(getProduct)) {
           const indexP = products.findIndex(getProduct);
           products.splice(indexP, 1);
           setProductsS(products);
+
           products = JSON.stringify(products);
           localStorage.setItem('products', products);
+          dispatch(actions.loadedCart(products));
         }
       }
     }
@@ -79,7 +86,7 @@ function CartCard({ product }) {
 
   return (
     <div className="cart_card">
-      {productsS ? 'Hola' : null}
+      {productsS ? '' : null}
       <ProductCart product={product} />
       <div className="cart_card__pricing">
         <div className="cart_card__pricing__quantity">

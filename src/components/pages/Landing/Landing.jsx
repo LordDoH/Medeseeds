@@ -3,14 +3,13 @@ import './Landing.scss';
 import { IoIosArrowUp } from 'react-icons/io';
 import { BsWhatsapp } from 'react-icons/bs';
 import Termo from '../../../assets/images/Termo.png';
-import Topcrop from '../../../assets/images/Topcrop.png';
 import Slide from './Slide/Slide';
 import ProductCard from './ProductCard/ProductCard';
 import CategoryCard from './CategoryCard/CategoryCard';
 import LearnCard from './LearnCard/LearnCard';
-import BranchCard from './BranchCard/BranchCard';
 import Slide1 from '../../../assets/images/Slide1.jpg';
 import Slide2 from '../../../assets/images/Slide2.jpg';
+import Allied from '../../layout/Allied/Allied';
 
 function Landing() {
   const scrollUp = () => {
@@ -89,17 +88,6 @@ function Landing() {
     },
   ];
 
-  const fakeBranchData = [
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-  ];
-
   const goWhatsapp =
     'https://wa.me/573015317547/?text=Saludos,%20quiero%20información%20adicional%20de%20los%20productos';
 
@@ -146,12 +134,7 @@ function Landing() {
       </a>
       {/* eslint-disable-next-line */}
       <div className="landing__scroll_up" onClick={scrollUp}><IoIosArrowUp /></div>
-      <div className="landing__allied">Allied Branches</div>
-      <div className="landing__allied_cards">
-        {fakeBranchData.map((e) => (
-          <BranchCard image={e.image} />
-        ))}
-      </div>
+      <Allied />
     </div>
   );
 }

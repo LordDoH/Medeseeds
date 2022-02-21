@@ -1,14 +1,13 @@
 import React from 'react';
 
 import CategoryCard from './CategoryCard/CategoryCard';
-import BranchCard from '../Landing/BranchCard/BranchCard';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import Slide1 from '../../../assets/images/Slide1.jpg';
 import Slide2 from '../../../assets/images/Slide2.jpg';
 import Termo from '../../../assets/images/Termo.png';
-import Topcrop from '../../../assets/images/Topcrop.png';
 import './Categories.scss';
+import Allied from '../../layout/Allied/Allied';
 
 function Categories() {
   const fakeCategoryData = [
@@ -21,17 +20,6 @@ function Categories() {
     { title: 'Electrical Accesories', image: Termo },
     { title: 'Electrical Accesories', image: Termo },
     { title: 'Electrical Accesories', image: Termo },
-  ];
-
-  const fakeBranchData = [
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
   ];
 
   return (
@@ -47,12 +35,7 @@ function Categories() {
       </button>
       <DeliveryPolicy />
       <GuaranteePolicy />
-      <div className="categories__allied">Allied Branches</div>
-      <div className="categories__allied_cards">
-        {fakeBranchData.map((e) => (
-          <BranchCard image={e.image} />
-        ))}
-      </div>
+      <Allied />
     </div>
   );
 }
