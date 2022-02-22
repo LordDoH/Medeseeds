@@ -38,19 +38,6 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-// const GET_PRODUCTS_BY_CATEGORY = gql`
-//   query getProductsByCategory($categoryTitle: String) {
-//     getProductsByCategory(categoryTitle: $categoryTitle) {
-//       id
-//       title
-//       description
-//       image
-//       brand
-//       price
-//     }
-//   }
-// `;
-
 function Landing() {
   const scrollUp = () => {
     window.scroll(0, 0);
@@ -58,7 +45,6 @@ function Landing() {
 
   const categories = useQuery(GET_CATEGORIES);
   const products = useQuery(GET_PRODUCTS);
-  console.log(products);
 
   const fakePostData = [
     {
@@ -103,7 +89,7 @@ function Landing() {
           <div className="landing__top_cards">
             {products.data?.getProducts.map((e, index) => {
               if (index < 5) {
-                return <ProductCard product={e} />;
+                return <ProductCard key={e.id} product={e} />;
               }
               return null;
             })}
@@ -135,6 +121,7 @@ function Landing() {
           <div className="landing__learn_cards">
             {fakePostData.map((e) => (
               <LearnCard
+                key={`learn${Math.random()}`}
                 image={e.image}
                 title={e.title}
                 description={e.description}

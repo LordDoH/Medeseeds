@@ -7,6 +7,7 @@ import './Allied.scss';
 const GET_BRANDS = gql`
   query getBrands {
     getBrands {
+      id
       logo
     }
   }
@@ -32,7 +33,7 @@ function Allied() {
           <div className="allied_brands__title">Allied Brands</div>
           <div className="allied_brands__cards">
             {data.getBrands.map((e) => (
-              <BranchCard image={e.logo} />
+              <BranchCard key={e.id} image={e.logo} />
             ))}
           </div>
         </div>

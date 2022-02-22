@@ -23,8 +23,6 @@ function ProductCard({ product }) {
     minimumFractionDigits: 0,
   });
 
-  // const cartState = useSelector((state) => state.cartState);
-
   const dispatch = useDispatch();
 
   const shortTitle =
@@ -39,7 +37,13 @@ function ProductCard({ product }) {
   const onClick = () => {
     if (!localStorage.getItem('products')) {
       let products = [
-        { title: product.title, unit_price: product.price, quantity: 1 },
+        {
+          title: product.title,
+          brand: product.brand,
+          unit_price: product.price,
+          image: product.image,
+          quantity: 1,
+        },
       ];
       products = JSON.stringify(products);
       localStorage.setItem('products', products);
@@ -55,7 +59,9 @@ function ProductCard({ product }) {
       } else {
         products.push({
           title: product.title,
+          brand: product.brand,
           unit_price: product.price,
+          image: product.image,
           quantity: 1,
         });
         products = JSON.stringify(products);

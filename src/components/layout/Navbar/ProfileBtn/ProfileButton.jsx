@@ -19,7 +19,7 @@ function ProfileButton({ currentUser }) {
       >
         <IoMdPerson />
         <div className="profilebtn__btn__desktop">
-          {currentUser.name?.toUpperCase()}
+          {currentUser?.name?.toUpperCase()}
         </div>
       </div>
       <div

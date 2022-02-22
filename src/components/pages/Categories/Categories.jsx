@@ -29,14 +29,17 @@ function Categories() {
       ) : (
         <div className="categories__cards">
           {categories.data.getCategories.map((e) => (
-            <CategoryCard2 image={e.image} title={e.title} />
+            <CategoryCard2 key={e.id} image={e.image} title={e.title} />
           ))}
         </div>
       )}
 
-      <button type="button" className="categories__more_btn">
-        More
-      </button>
+      {categories.data?.getCategories.length > 10 ? (
+        <button type="button" className="categories__more_btn">
+          More
+        </button>
+      ) : null}
+
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />

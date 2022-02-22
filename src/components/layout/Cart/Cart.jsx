@@ -5,12 +5,14 @@ import CartCard from './CartCard/CartCard';
 
 function Cart() {
   const [productData, setProductData] = useState([]);
+  const [values, setValues] = useState([0, 0]);
 
   const cartState = useSelector((state) => state.cartState);
 
   useEffect(() => {
     const productsToken = JSON.parse(localStorage.getItem('products'));
     setProductData(productsToken);
+    setValues(productsToken?.map((e) => e.unit_price * e.quantity));
   }, [cartState]);
 
   const formatterPeso = new Intl.NumberFormat('es-CO', {
@@ -19,12 +21,13 @@ function Cart() {
     minimumFractionDigits: 0,
   });
 
-  // const values = fakeProductData.map((e) => e.price);
+  // const values = productData.map((e) => e.unit_price) || 0;
 
-  // suma.reduce((a, b) => a + b)
-
-  // const suma = values.reduce((a, b) => a + b);
-  const suma = 100000;
+  // if (values !== []) {
+  //   // const sum = values.reduce((a, b) => a + b);
+  //   setSuma(sum);
+  // }
+  const suma = values?.reduce((a, b) => a + b) || 0;
 
   const subtotalCurrency = formatterPeso.format(suma / 1.19);
   const taxCurrency = formatterPeso.format((suma / 1.19) * 0.19);
@@ -32,8 +35,8 @@ function Cart() {
 
   return (
     <div className="cart">
-      {productData?.length !== 0 ? (
-        productData?.map((e) => <CartCard product={e} />)
+      {productData ? (
+        productData?.map((e) => <CartCard key={`cart${e.id}`} product={e} />)
       ) : (
         <div className="cart__text">There are no products, Add some</div>
       )}
