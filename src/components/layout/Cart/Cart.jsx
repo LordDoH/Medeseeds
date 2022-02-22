@@ -35,7 +35,7 @@ function Cart() {
       {productData?.length !== 0 ? (
         productData?.map((e) => <CartCard product={e} />)
       ) : (
-        <div className="cart__text">There is no products, Add some</div>
+        <div className="cart__text">There are no products, Add some</div>
       )}
       <hr className="cart__line" />
       <div className="cart__totals">

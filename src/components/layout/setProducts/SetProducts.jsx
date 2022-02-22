@@ -7,12 +7,7 @@ function SetProducts({ products }) {
     <div>
       <div className="setProducts">
         {products?.map((e) => (
-          <ProductCard
-            image={e.image}
-            brand={e.brand}
-            title={e.title}
-            price={e.price}
-          />
+          <ProductCard product={e} />
         ))}
       </div>
     </div>

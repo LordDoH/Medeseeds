@@ -58,12 +58,7 @@ function Products() {
       <div className="products__title">Products</div>
       <div className="products__cards">
         {fakeProductData.map((e) => (
-          <ProductCard
-            image={e.image}
-            title={e.title}
-            brand={e.brand}
-            price={e.price}
-          />
+          <ProductCard product={e} />
         ))}
       </div>
       <button type="button" className="products__more_btn">

@@ -1,4 +1,5 @@
 import {
+  LOAD_ROUTE,
   LOAD_CART,
   EDIT_ANSWER,
   EDIT_POST,
@@ -12,6 +13,10 @@ import {
 } from './types';
 
 // action creators
+const loadRoute = (route) => ({
+  type: LOAD_ROUTE,
+  payload: route,
+});
 const loadCart = (product) => ({
   type: LOAD_CART,
   payload: product,
@@ -52,6 +57,14 @@ const logOut = () => ({
   type: LOGOUT,
   payload: false,
 });
+
+const loadedRoute = (response) => async (dispatch) => {
+  try {
+    dispatch(loadRoute(response));
+  } catch (e) {
+    // console.log(e)
+  }
+};
 
 const loadedCart = (response) => async (dispatch) => {
   try {
@@ -133,6 +146,7 @@ const closeSesion = () => async (dispatch) => {
 };
 
 export default {
+  loadedRoute,
   loadedCart,
   editedAnswer,
   editedPost,

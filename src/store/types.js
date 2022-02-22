@@ -1,3 +1,6 @@
+// Change route
+export const LOAD_ROUTE = 'LOAD_ROUTE';
+
 // Answer types
 export const EDIT_ANSWER = 'EDIT_ANSWER';
 

@@ -9,7 +9,7 @@ import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import Allied from '../../layout/Allied/Allied';
-import Termo from '../../../assets/images/Termo.png';
+// import Termo from '../../../assets/images/Termo.png';
 import SetProducts from '../../layout/setProducts/SetProducts';
 
 const GET_PRODUCT_BY_ID = gql`
@@ -25,6 +25,19 @@ const GET_PRODUCT_BY_ID = gql`
   }
 `;
 
+const GET_PRODUCTS_LATEST = gql`
+  query getLatestProducts {
+    getLatestProducts {
+      id
+      title
+      description
+      image
+      brand
+      price
+    }
+  }
+`;
+
 function ProductDetail() {
   const { productId } = useParams();
 
@@ -34,54 +47,13 @@ function ProductDetail() {
     },
   });
 
+  const productos = useQuery(GET_PRODUCTS_LATEST);
+
   const productData = data?.getProduct;
 
   const dispatch = useDispatch();
 
   const [mainImage, setMainImage] = useState('');
-
-  const fakeProductData = [
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-  ];
 
   useEffect(() => {
     setMainImage(productData?.image);
@@ -232,7 +204,10 @@ function ProductDetail() {
       ) : null}
       <HelpSlice />
       <div className="product_detail__related_title"> Related </div>
-      <SetProducts products={fakeProductData} />
+      {!productos.loading ? (
+        <SetProducts products={productos?.data?.getLatestProducts} />
+      ) : null}
+
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />

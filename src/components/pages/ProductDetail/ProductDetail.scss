@@ -21,6 +21,8 @@
       gap: 2rem;
       &__main{
         width: 280px;
+        height: 280px;
+        object-fit: contain;
       }
       &__secondary{
         display: flex;
@@ -28,6 +30,8 @@
         gap: 10px;
         &__element{
           width: 80px;
+          height: 80px;
+          object-fit: cover;
           cursor: pointer;
         }
       }
@@ -139,10 +143,12 @@
       &__images{
         &__main{
           width: 350px;
+          height: 350px;
         }
         &__secondary{
           &__element{
             width: 100px;
+            height: 100px;
           }
         }
       }

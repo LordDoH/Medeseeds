@@ -2,9 +2,7 @@
 
 .slide {
   width: 90%;
-  
-  margin: 40px auto;
-  margin-top: 150px;
+  margin: 0 auto 40px auto;
   overflow: hidden;
   position: relative; 
   
@@ -94,8 +92,8 @@
 
 @media(min-width:$bp_tablet){
   .slide {
-    width: 80%;
-    max-width: 1000px;
+    width: 75%;
+    
     &__content{
       &__img{
         img{
