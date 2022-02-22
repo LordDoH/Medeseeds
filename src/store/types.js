@@ -1,5 +1,11 @@
+// Change route
+export const LOAD_ROUTE = 'LOAD_ROUTE';
+
 // Answer types
 export const EDIT_ANSWER = 'EDIT_ANSWER';
+
+// Load Cart types
+export const LOAD_CART = 'LOAD_CART';
 
 // Post types
 export const EDIT_POST = 'EDIT_POST';

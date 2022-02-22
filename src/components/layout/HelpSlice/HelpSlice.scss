@@ -1,0 +1,46 @@
+@import '../../../scss/main';
+
+.help_slice{
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $primary-font;
+  font-size: 3rem;
+  font-weight: 700;
+  color: $primary-color;
+  position: relative;
+  padding: 60px 0 40px 0;
+  width: 300px;
+  &__content{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    &__icon{
+      font-size: 4rem;
+      color: $warning-color;
+    }
+    &__title{
+      text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      padding-bottom: 10px;
+    }
+    
+  }
+  &__description{
+    font-size: $secondary-font-size;
+    font-family: $secondary-font;
+    font-weight: normal;
+    padding-left: 3rem;
+    width: 90%;
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .help_slice{
+    width: 550px;
+    &__description{
+      padding: 0;
+      width: 100%;
+    }
+  }
+}

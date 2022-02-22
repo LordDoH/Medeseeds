@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import './Slide.scss';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { useQuery, gql } from '@apollo/client';
 
-import Slide1 from '../../../../assets/images/Slide1.jpg';
-import Slide2 from '../../../../assets/images/Slide2.jpg';
-import Slide3 from '../../../../assets/images/Slide3.jpg';
+const GET_SLIDERS = gql`
+  query getSImages {
+    getSImages {
+      image
+    }
+  }
+`;
 
 function Slide() {
+  const { data, loading } = useQuery(GET_SLIDERS);
+
   const [dot, setDot] = useState(1);
   const arrImage = [1, 2, 3];
   const [active, setActive] = useState([1, 0, 0]);
@@ -49,36 +56,45 @@ function Slide() {
   };
 
   return (
-    <div className="slide">
-      <div className={`slide__content state${dot}`}>
-        <div className="slide__content__img">
-          <img src={Slide1} alt="SlideImage" />
-        </div>
-        <div className="slide__content__img">
-          <img src={Slide2} alt="SlideImage2" />
-        </div>
-        <div className="slide__content__img">
-          <img src={Slide3} alt="SlideImage3" />
-        </div>
-      </div>
+    <div>
+      {loading ? null : (
+        <div className="slide">
+          <div className={`slide__content state${dot}`}>
+            <div className="slide__content__img">
+              <img src={data.getSImages[0].image} alt="SlideImage" />
+            </div>
+            <div className="slide__content__img">
+              <img src={data.getSImages[1].image} alt="SlideImage2" />
+            </div>
+            <div className="slide__content__img">
+              <img src={data.getSImages[2].image} alt="SlideImage3" />
+            </div>
+          </div>
 
-      <div className="slide__dots">
-        {arrImage.map((e) => (
-          // eslint-disable-next-line
-          <div key={`dotSlide${e}`}
-            className={`slide__dots__dot active${active[e - 1]}`}
-            onClick={() => onClickDot(e)}
-          />
-        ))}
-      </div>
+          <div className="slide__dots">
+            {arrImage.map((e) => (
+              <div
+                key={`dotSlide${e}`}
+                className={`slide__dots__dot active${active[e - 1]}`}
+                onClick={() => onClickDot(e)}
+              />
+            ))}
+          </div>
 
-      <div className="slide__controls">
-        {/* eslint-disable-next-line */}
-        <IoIosArrowBack className="slide__controls__backwards" onClick={onClickBackward}/>
+          <div className="slide__controls">
+            <IoIosArrowBack
+              className="slide__controls__backwards"
+              onClick={onClickBackward}
+            />
 
-        {/* eslint-disable-next-line */}
-        <IoIosArrowForward className="slide__controls__forwards" onClick={onClickForward}/>
-      </div>
+            {/* eslint-disable-next-line */}
+            <IoIosArrowForward
+              className="slide__controls__forwards"
+              onClick={onClickForward}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

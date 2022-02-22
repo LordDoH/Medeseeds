@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './CategoryCard.scss';
+import './CategoryCard2.scss';
 import actions from '../../../../store/action';
 
-function CategoryCard({ title, image }) {
+function CategoryCard2({ title, image }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,11 +14,11 @@ function CategoryCard({ title, image }) {
   };
 
   return (
-    <div className="category_card" onClick={linkto}>
-      <img src={image} alt="category_image" className="category_card__img" />
-      <div className="category_card__title">{title}</div>
+    <div className="category2_card" onClick={linkto}>
+      <img src={image} alt="category_image" className="category2_card__img" />
+      <div className="category2_card__title">{title}</div>
     </div>
   );
 }
 
-export default CategoryCard;
+export default CategoryCard2;

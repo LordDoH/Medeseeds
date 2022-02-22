@@ -1,5 +1,7 @@
 /* eslint-disable default-param-last */
 import {
+  LOAD_ROUTE,
+  LOAD_CART,
   EDIT_ANSWER,
   EDIT_POST,
   EDIT_CATEGORY,
@@ -12,6 +14,8 @@ import {
 } from './types';
 
 const initialState = {
+  routeState: {},
+  cartState: {},
   editAnswer: {},
   editPost: {},
   editProduct: {},
@@ -26,6 +30,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   const newValue = action.payload;
   switch (action.type) {
+    case LOAD_ROUTE:
+      return { ...state, routeState: newValue };
+    case LOAD_CART:
+      return { ...state, cartState: newValue };
     case EDIT_ANSWER:
       return { ...state, editAnswer: newValue };
     case EDIT_POST:
@@ -49,7 +57,7 @@ const reducer = (state = initialState, action) => {
         userAuthenticated: true,
       };
     case LOGOUT:
-      localStorage.clear();
+      localStorage.removeItem('token');
       return {
         ...state,
         userAuthenticated: false,

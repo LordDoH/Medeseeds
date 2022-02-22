@@ -1,0 +1,160 @@
+@import '../../../scss/main';
+
+.product_detail{
+  padding-top: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__card{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    background-color: $light-color;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    &__images{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      &__main{
+        width: 280px;
+        height: 280px;
+        object-fit: contain;
+      }
+      &__secondary{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        &__element{
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          cursor: pointer;
+        }
+      }
+    }
+    &__information{
+      width: 100%;
+      color: $dark-color;
+      &__title{
+        font-family: $primary-font;
+        font-size: 3.6rem;
+        font-weight: 700;
+      }
+      &__brand{
+        font-family: $secondary-font;
+        font-size: 2rem;
+        text-transform: uppercase;
+      }
+      &__description{
+        font-family: $secondary-font;
+        font-size: 1.6rem;
+        width: 90%;
+      }
+      &__shopper{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 20px;
+        &__setquantity{
+          display: flex;
+          justify-content: center;
+          gap: 2rem;
+          padding: 20px 0;
+          &__btn{
+            font-size: 3rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: $sucess-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding-bottom: 4px;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+          }
+          &__text{
+            font-size: 2 rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            background-color: $light-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+          }
+        }
+        &__price{
+          font-size: 2rem;
+          font-weight: 700;
+          padding-bottom: 10px;
+        }
+        &__quantity{
+          font-family: $primary-font;
+          font-size: 2rem;
+          font-weight: 700;
+          display: flex;
+          text-align: center;
+        }
+        &__shop_btn{
+          display: flex;
+          justify-content: center;
+          gap: 5px;
+          align-items: center;
+          height: 30px;
+          width: 130px;
+          font-size: 1.6rem;
+          font-family: $secondary-font;
+          font-weight: 700;
+          border: none;
+          background-color: $dark-color;
+          color: $light-color;
+          border-radius: 5px;
+          box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+          cursor: pointer;
+          &:hover{
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+  &__related_title{
+    font-family: $primary-font;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .product_detail{
+    &__card{
+      width: 800px;
+      flex-direction: row;
+      width: 800px;
+      justify-content: space-between;
+      padding: 2rem;
+      &__images{
+        &__main{
+          width: 350px;
+          height: 350px;
+        }
+        &__secondary{
+          &__element{
+            width: 100px;
+            height: 100px;
+          }
+        }
+      }
+      &__information{
+        width: 350px;
+      }
+    }
+  }
+}

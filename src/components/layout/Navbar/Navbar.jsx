@@ -34,18 +34,21 @@ function Navbar() {
     setMov(!mov);
   };
 
+  // extract userAuthenticated
+  const routeActive = useSelector((state) => state.routeState);
+
   useEffect(() => {
     const ruta = window.location.pathname;
-    if (ruta === '/') {
+    if (ruta === '/' || routeActive === '/') {
       setActive([true, false, false, false]);
-    } else if (ruta === '/categories') {
+    } else if (ruta === '/categories' || routeActive === '/categories') {
       setActive([false, true, false, false]);
-    } else if (ruta === '/learn') {
+    } else if (ruta === '/learn' || routeActive === '/learn') {
       setActive([false, false, true, false]);
-    } else if (ruta === '/about') {
+    } else if (ruta === '/about' || routeActive === '/about') {
       setActive([false, false, false, true]);
     }
-  }, [mov]);
+  }, [mov, routeActive]);
 
   // Load user data in any page
   const { isAuthenticated, isLoading } = useAuth0();
@@ -70,9 +73,6 @@ function Navbar() {
       if (isAuthenticated === false) {
         dispatch(actions.closeSesion());
       }
-      // if (!localStorage.getItem('token')) {
-      //   dispatch(actions.closeSesion());
-      // }
     }
   }, [isLoading]);
 

@@ -1,92 +1,56 @@
 import React from 'react';
+import { useQuery, gql } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 import ProductCard from '../Landing/ProductCard/ProductCard';
-import BranchCard from '../Landing/BranchCard/BranchCard';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
-import Termo from '../../../assets/images/Termo.png';
-import Topcrop from '../../../assets/images/Topcrop.png';
+
 import './Products.scss';
+import Spinner from '../../layout/Spinner/Spinner';
+import Allied from '../../layout/Allied/Allied';
+
+const GET_PRODUCTS_BY_CATEGORY = gql`
+  query getProductsByCategory($categoryTitle: String) {
+    getProductsByCategory(categoryTitle: $categoryTitle) {
+      id
+      title
+      description
+      image
+      brand
+      price
+    }
+  }
+`;
 
 function Products() {
-  const fakeBranchData = [
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-    { image: Topcrop },
-  ];
+  const { category } = useParams();
 
-  const fakeProductData = [
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-    {
-      image: Termo,
-      title: 'Termohigrometro con sonda long. variable muy barato',
-      brand: 'Cornwall',
-      description:
-        'El mejor del mercado controla la temperatura y los ciclos de humedad en tu cultivo, ideal para interiores, cuida tus plantas, evitando hongos por exceso de humedad o acaros por altas temperaturas',
-      price: 75000,
-    },
-  ];
+  const products = useQuery(GET_PRODUCTS_BY_CATEGORY, {
+    variables: { categoryTitle: category },
+  });
 
   return (
     <div className="products">
       <div className="products__title">Products</div>
-      <div className="products__cards">
-        {fakeProductData.map((e) => (
-          <ProductCard
-            image={e.image}
-            title={e.title}
-            brand={e.brand}
-            price={e.price}
-          />
-        ))}
-      </div>
-      <button type="button" className="products__more_btn">
-        More
-      </button>
+      {!products.loading ? (
+        <div className="products__cards">
+          {products.data.getProductsByCategory.map((e) => (
+            <ProductCard key={e.id} product={e} />
+          ))}
+        </div>
+      ) : (
+        <Spinner />
+      )}
+
+      {products.data?.getProductsByCategory.length > 10 ? (
+        <button type="button" className="products__more_btn">
+          More
+        </button>
+      ) : null}
       <DeliveryPolicy />
       <GuaranteePolicy />
-      <div className="products__allied">Allied Branches</div>
-      <div className="products__allied_cards">
-        {fakeBranchData.map((e) => (
-          <BranchCard image={e.image} />
-        ))}
-      </div>
+      <Allied />
     </div>
   );
 }

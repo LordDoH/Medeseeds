@@ -13,7 +13,7 @@ function ProductCart({ product }) {
       ? `${product.title.slice(0, 40)}...`
       : product.title;
 
-  const priceCurrency = formatterPeso.format(product.price);
+  const priceCurrency = formatterPeso.format(product.unit_price);
 
   return (
     <div className="product_cart">
