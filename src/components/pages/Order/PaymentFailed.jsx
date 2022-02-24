@@ -88,7 +88,7 @@ function PaymentFailed() {
           </tr>
           <tr className="payment_failed__table__row">
             <td className="payment_failed__table__row__title">Total paid</td>
-            <td className="payment_failed__table__row__data">0</td>
+            <td className="payment_failed__table__row__data">$ 0</td>
           </tr>
           <tr className="payment_failed__table__row">
             <td className="payment_failed__table__row__title">Status</td>

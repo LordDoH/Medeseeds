@@ -30,6 +30,7 @@ const USER_BY_TOKEN = gql`
     getUserByToken(token: $token) {
       email
       name
+      lastName
       role
       id
       photo

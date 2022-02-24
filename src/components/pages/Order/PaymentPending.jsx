@@ -61,6 +61,12 @@ function PaymentPending() {
     }
   }, [orders.loading]);
 
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  });
+
   return (
     <div className="payment_pending">
       <div className="payment_pending__text">
@@ -97,7 +103,7 @@ function PaymentPending() {
           <tr className="payment_pending__table__row">
             <td className="payment_pending__table__row__title">Total paid</td>
             <td className="payment_pending__table__row__data">
-              {orders.data?.getOrdersByUser[0].total}
+              {formatterPeso.format(orders.data?.getOrdersByUser[0].total)}
             </td>
           </tr>
           <tr className="payment_pending__table__row">

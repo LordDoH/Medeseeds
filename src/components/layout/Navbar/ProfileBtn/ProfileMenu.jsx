@@ -25,10 +25,7 @@ function ProfileMenu({ authenticateUser }) {
           alt="Imagen de Perfil"
         />
 
-        <Link
-          className="profile_menu__item__text2"
-          to={`/profile/${authenticateUser?.email}`}
-        >
+        <Link className="profile_menu__item__text2" to="/profile">
           Profile
         </Link>
       </li>
@@ -38,7 +35,7 @@ function ProfileMenu({ authenticateUser }) {
           <div className="profile_menu__item__icon">
             <BsQuestionCircleFill />
           </div>
-          <Link className="profile_menu__item__text" to="/help">
+          <Link className="profile_menu__item__text" to="/about">
             Help
           </Link>
         </li>

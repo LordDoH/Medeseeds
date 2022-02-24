@@ -41,6 +41,12 @@ function PaymentSuccess() {
   const mpStatus = urlParams.get('status');
   const mpMethod = urlParams.get('payment_type');
 
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  });
+
   useEffect(async () => {
     if (!mpId || !localStorage.getItem('products')) {
       navigate('/');
@@ -96,7 +102,7 @@ function PaymentSuccess() {
           <tr className="payment_success__table__row">
             <td className="payment_success__table__row__title">Total paid</td>
             <td className="payment_success__table__row__data">
-              {orders.data?.getOrdersByUser[0].total}
+              {formatterPeso.format(orders.data?.getOrdersByUser[0].total)}
             </td>
           </tr>
           <tr className="payment_success__table__row">

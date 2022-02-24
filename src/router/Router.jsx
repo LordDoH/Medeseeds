@@ -14,6 +14,7 @@ import Order from '../components/pages/Order/Order';
 import PaymentSuccess from '../components/pages/Order/PaymentSuccess';
 import PaymentPending from '../components/pages/Order/PaymentPending';
 import PaymentFailed from '../components/pages/Order/PaymentFailed';
+import Profile from '../components/pages/Profile/Profile';
 
 function Router() {
   return (
@@ -22,7 +23,7 @@ function Router() {
         <Route path="/" element={<Landing />} />
         <Route path="/activate/:hash" element={<Verify />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/profile" element={<Landing />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/learn" element={<Landing />} />
         <Route path="/learn/:post" element={<Landing />} />
         <Route path="/orderresume" element={<Order />} />

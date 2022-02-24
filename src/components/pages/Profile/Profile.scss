@@ -1,0 +1,188 @@
+@import '../../../scss/main';
+
+.profile{
+  padding-top: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark-color;
+  position: relative;
+  &__user_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 30px;
+    background-color: $light-color;
+    border-radius: 20px;
+    position: relative;
+    &__photo{
+      position: absolute;
+      top: -50px;
+      & img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50px;
+      }
+    }
+    &__role{
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-family: $secondary-font;
+      color: $boring-color;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+    &__icon{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: $secondary-font;
+      color: $boring-color;
+      font-size: 3rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      &:hover{
+        color: $dark-color;
+      }
+    }
+    &__order{
+      padding-top: 20px;
+      font-family: $primary-font;
+      font-size: 2rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    &__table{
+      margin-top: 30px;
+      text-align: center;
+      word-break: break-all;
+      width: 100%;
+      &__head{
+        font-family: $primary-font;
+        font-size: 2rem;
+        &__title{
+          padding: 5px;
+        }
+      }
+      &__body{
+        font-family: $secondary-font;
+        font-size: 1.4rem;
+        &__data{
+          padding: 5px;
+        }
+      }
+
+    }
+    &__info{
+      width: 100%;
+      padding: 45px 0px 0 20px;
+      display: flex;
+      flex-direction: column;
+      &__col{
+        display: flex;
+        flex-direction: column;
+        &__data{
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          &__title{
+            font-family: $secondary-font;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: $boring-color;
+            padding: 5px 0px;
+          }
+          &__description{
+            font-family: $primary-font;
+            font-size: 2rem;
+            padding: 2px 0px;
+          }
+          &__change_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 150px;
+            font-size: 1.4rem;
+            font-family: $secondary-font;
+            font-weight: 700;
+            border: none;
+            background-color: $dark-color;
+            color: $light-color;
+            border-radius: 5px;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+            margin: 5px 0;
+            cursor: pointer;
+            &:hover{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__title{
+    font-family: $primary-font;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .profile{
+    padding-top: 250px;
+    &__user_card {
+      padding-top: 90px;
+      width: 70%;
+      max-width: 800px;
+      &__photo{
+        top: -100px;
+        & img {
+          width: 200px;
+          height: 200px;
+          border-radius: 100px;
+        }
+      }
+      &__role{
+        font-size: 1.6rem;
+      }
+      &__order{
+        font-size: 2.5rem;
+      }
+      &__table{
+        width: 90%;
+        &__body{
+          font-size: 1.6rem;
+        }
+  
+      }
+      &__info{
+        flex-direction: row;
+        justify-content: space-around;
+        padding-bottom: 30px;
+        &__col{
+          &__data{
+            &__title{
+              font-size: 1.4rem;
+              padding: 10px 0px;
+            }
+            &__description{
+              font-size: 2.5rem;
+              padding: 5px 0px;
+            }
+            &__change_btn{
+              height: 35px;
+              font-size: 1.6rem;
+              
+            }
+          }
+        }
+      }
+    }
+  } 
+}

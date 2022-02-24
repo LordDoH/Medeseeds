@@ -147,7 +147,7 @@ function Order() {
         errorText="Please insert a valid address"
         inputParameters={parameters.address}
       />
-      <div className="order__input">Telephone</div>
+      <div className="order__input">Phone</div>
       <Input
         state={telephone}
         changeState={setTelephone}
