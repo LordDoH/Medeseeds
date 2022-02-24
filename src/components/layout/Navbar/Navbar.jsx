@@ -36,6 +36,7 @@ function Navbar() {
   const [mov, setMov] = useState(true);
   const onClick = async () => {
     setMov(!mov);
+    dispatch(actions.loadedRoute(``));
   };
 
   // extract userAuthenticated
