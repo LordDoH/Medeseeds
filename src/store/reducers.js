@@ -14,7 +14,7 @@ import {
 } from './types';
 
 const initialState = {
-  routeState: {},
+  routeState: '',
   cartState: {},
   editAnswer: {},
   editPost: {},

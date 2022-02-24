@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CartCard.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import ProductCart from './ProductCart/ProductCart';
 import actions from '../../../../store/action';
 
 function CartCard({ product }) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product.quantity);
+
+  const cartState = useSelector((state) => state.cartState);
+
+  const getProduct = (e) => e.title === product.title;
+
+  useEffect(() => {
+    const productsToken = JSON.parse(localStorage.getItem('products'));
+    if (productsToken) {
+      const productn = productsToken.find(getProduct);
+      setQuantity(productn.quantity);
+    }
+  }, [cartState]);
 
   const dispatch = useDispatch();
 
@@ -16,8 +29,6 @@ function CartCard({ product }) {
   });
 
   const priceCurrency = formatterPeso.format(product.unit_price * quantity);
-
-  const getProduct = (e) => e.title === product.title;
 
   const reduceProduct = () => {
     if (quantity > 1) {
@@ -36,17 +47,29 @@ function CartCard({ product }) {
     }
     if (quantity === 1) {
       if (localStorage.getItem('products')) {
-        let products = JSON.parse(localStorage.getItem('products'));
-        if (products.length === 1) {
-          localStorage.removeItem('products');
-          dispatch(actions.loadedCart([]));
-        } else if (products.find(getProduct)) {
-          const indexP = products.findIndex(getProduct);
-          products.splice(indexP, 1);
-          products = JSON.stringify(products);
-          localStorage.setItem('products', products);
-          dispatch(actions.loadedCart(products));
-        }
+        Swal.fire({
+          title: 'Please confirm!',
+          text: 'Do you want to remove this product?',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          confirmButtonColor: '#739D38',
+          icon: 'question',
+          imageWidth: 70,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let products = JSON.parse(localStorage.getItem('products'));
+            if (products.length === 1) {
+              localStorage.removeItem('products');
+              dispatch(actions.loadedCart([]));
+            } else if (products.find(getProduct)) {
+              const indexP = products.findIndex(getProduct);
+              products.splice(indexP, 1);
+              products = JSON.stringify(products);
+              localStorage.setItem('products', products);
+              dispatch(actions.loadedCart(products));
+            }
+          }
+        });
       }
     }
     // console.log(productsS);
@@ -70,16 +93,28 @@ function CartCard({ product }) {
   const removeProduct = () => {
     if (localStorage.getItem('products')) {
       let products = JSON.parse(localStorage.getItem('products'));
-      if (products.length === 1) {
-        localStorage.removeItem('products');
-        dispatch(actions.loadedCart([]));
-      } else if (products.find(getProduct)) {
-        const indexP = products.findIndex(getProduct);
-        products.splice(indexP, 1);
-        products = JSON.stringify(products);
-        localStorage.setItem('products', products);
-        dispatch(actions.loadedCart(products));
-      }
+      Swal.fire({
+        title: 'Please confirm!',
+        text: 'Do you want to remove this product?',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        confirmButtonColor: '#739D38',
+        icon: 'question',
+        imageWidth: 70,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (products.length === 1) {
+            localStorage.removeItem('products');
+            dispatch(actions.loadedCart([]));
+          } else if (products.find(getProduct)) {
+            const indexP = products.findIndex(getProduct);
+            products.splice(indexP, 1);
+            products = JSON.stringify(products);
+            localStorage.setItem('products', products);
+            dispatch(actions.loadedCart(products));
+          }
+        }
+      });
     }
   };
 

@@ -80,8 +80,11 @@ function ProductDetail() {
       let products = [
         {
           title: productData.title,
+          brand: productData.brand,
           unit_price: productData.price,
           quantity,
+          image: productData.image,
+          productId: productData.id,
         },
       ];
       products = JSON.stringify(products);
@@ -98,8 +101,11 @@ function ProductDetail() {
       } else {
         products.push({
           title: productData.title,
+          brand: productData.brand,
           unit_price: productData.price,
           quantity,
+          image: productData.image,
+          productId: productData.id,
         });
         products = JSON.stringify(products);
         localStorage.setItem('products', products);

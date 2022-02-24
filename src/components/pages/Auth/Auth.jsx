@@ -33,6 +33,8 @@ const USER_BY_TOKEN = gql`
       role
       id
       photo
+      address
+      telephone
     }
   }
 `;
@@ -61,6 +63,7 @@ function Auth() {
                 lastName: user.name.split(' ')[1] || '',
                 email: user.email,
                 photo: user.picture,
+                created: Date.now().toString(),
               },
             },
           });

@@ -21,6 +21,8 @@ const USER_BY_TOKEN = gql`
       role
       id
       photo
+      address
+      telephone
     }
   }
 `;
@@ -29,23 +31,29 @@ function Navbar() {
   // Actual page functionality
   const [active, setActive] = useState([true, false, false, false]);
 
+  const dispatch = useDispatch();
+
   const [mov, setMov] = useState(true);
   const onClick = async () => {
     setMov(!mov);
+    dispatch(actions.loadedRoute(``));
   };
 
   // extract userAuthenticated
   const routeActive = useSelector((state) => state.routeState);
 
-  useEffect(() => {
+  useEffect(async () => {
     const ruta = window.location.pathname;
     if (ruta === '/' || routeActive === '/') {
       setActive([true, false, false, false]);
-    } else if (ruta === '/categories' || routeActive === '/categories') {
+    } else if (
+      ruta.includes('categories') ||
+      routeActive.includes('/categories')
+    ) {
       setActive([false, true, false, false]);
-    } else if (ruta === '/learn' || routeActive === '/learn') {
+    } else if (ruta.includes('learn') || routeActive === '/learn') {
       setActive([false, false, true, false]);
-    } else if (ruta === '/about' || routeActive === '/about') {
+    } else if (ruta.includes('about') || routeActive === '/about') {
       setActive([false, false, false, true]);
     }
   }, [mov, routeActive]);
@@ -56,7 +64,6 @@ function Navbar() {
   const [getUser] = useLazyQuery(USER_BY_TOKEN, {
     variables: { token: localStorage.getItem('token') },
   });
-  const dispatch = useDispatch();
 
   useEffect(async () => {
     if (isAuthenticated) {
