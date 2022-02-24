@@ -10,6 +10,10 @@ import P404 from '../components/pages/P404/P404';
 import Auth from '../components/pages/Auth/Auth';
 import Verify from '../components/pages/Auth/Verify';
 import ProductDetail from '../components/pages/ProductDetail/ProductDetail';
+import Order from '../components/pages/Order/Order';
+import PaymentSuccess from '../components/pages/Order/PaymentSuccess';
+import PaymentPending from '../components/pages/Order/PaymentPending';
+import PaymentFailed from '../components/pages/Order/PaymentFailed';
 
 function Router() {
   return (
@@ -21,7 +25,10 @@ function Router() {
         <Route path="/profile" element={<Landing />} />
         <Route path="/learn" element={<Landing />} />
         <Route path="/learn/:post" element={<Landing />} />
-        <Route path="/orderresume" element={<Landing />} />
+        <Route path="/orderresume" element={<Order />} />
+        <Route path="/orderresume/success" element={<PaymentSuccess />} />
+        <Route path="/orderresume/pending" element={<PaymentPending />} />
+        <Route path="/orderresume/failed" element={<PaymentFailed />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/create" element={<Categories />} />
         <Route path="/categories/edit" element={<Categories />} />

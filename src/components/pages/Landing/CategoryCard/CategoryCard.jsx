@@ -9,7 +9,7 @@ function CategoryCard({ title, image }) {
   const dispatch = useDispatch();
 
   const linkto = () => {
-    dispatch(actions.loadedRoute(`/categories/${title}`));
+    dispatch(actions.loadedRoute('/categories'));
     navigate(`/categories/${title}`);
   };
 

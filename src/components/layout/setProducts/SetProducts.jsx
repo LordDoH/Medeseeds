@@ -7,7 +7,7 @@ function SetProducts({ products }) {
     <div>
       <div className="setProducts">
         {products?.map((e) => (
-          <ProductCard product={e} />
+          <ProductCard key={e.id} product={e} />
         ))}
       </div>
     </div>

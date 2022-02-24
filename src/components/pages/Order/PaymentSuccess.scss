@@ -1,0 +1,74 @@
+@import '../../../scss/main';
+
+.payment_success{
+  font-family: $primary-font;
+  font-weight: 700;
+  padding-top: 150px;
+  text-align: center;
+  margin: 0 auto;
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & span {
+    color: $sucess-color
+  }
+  &__text{
+    font-size: 3.6rem;
+    padding-bottom: 40px;
+    width: 70%;
+  }
+  &__table{
+    font-family: $secondary-font;
+    font-size: 2rem;
+    width: 80%;
+    &__row{
+      &__data{
+        max-width: 200px;
+        word-break: break-all;
+        font-weight: normal;
+        color: $dark-color;
+        padding: 5px;
+        &.cap{
+          text-transform: capitalize;
+        }
+      }
+    }
+    &__row_headers{
+      font-family: $primary-font;
+      font-size: 2.5rem;
+      & th{
+        padding: 5px;
+      }
+    }
+    
+  }
+  &__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 90px;
+    font-size: 1.6rem;
+    font-family: $secondary-font;
+    font-weight: 700;
+    border: none;
+    background-color: $dark-color;
+    color: $light-color;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 40px;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+    }
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .payment_success{
+    &__table{
+      width: 50%;
+    }
+  }
+}

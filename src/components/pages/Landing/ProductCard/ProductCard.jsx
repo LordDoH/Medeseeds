@@ -43,6 +43,7 @@ function ProductCard({ product }) {
           unit_price: product.price,
           image: product.image,
           quantity: 1,
+          productId: product.id,
         },
       ];
       products = JSON.stringify(products);
@@ -63,6 +64,7 @@ function ProductCard({ product }) {
           unit_price: product.price,
           image: product.image,
           quantity: 1,
+          productId: product.id,
         });
         products = JSON.stringify(products);
         localStorage.setItem('products', products);
@@ -73,11 +75,7 @@ function ProductCard({ product }) {
 
   const navigate = useNavigate();
   const linkto = () => {
-    dispatch(
-      actions.loadedRoute(
-        `/categories/${data.getCategoryTitleByProduct}/${product.id}`
-      )
-    );
+    dispatch(actions.loadedRoute('/categories/product'));
     navigate(`/categories/${data.getCategoryTitleByProduct}/${product.id}`);
   };
   return (

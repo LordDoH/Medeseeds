@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './Cart.scss';
 import { useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import CartCard from './CartCard/CartCard';
 
 function Cart() {
+  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+
+  const payCart = async () => {
+    const productsToken = JSON.parse(localStorage.getItem('products'));
+    if (!productsToken) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Add some products to cart',
+        confirmButtonText: 'Understood',
+        timer: 2000,
+        confirmButtonColor: '#739D38',
+        imageUrl:
+          'https://res.cloudinary.com/medeseeds/image/upload/v1645591577/shopping-basket_w7jr0w.png',
+        imageWidth: 70,
+      });
+    } else {
+      navigate('/orderresume');
+    }
+  };
+
   const [productData, setProductData] = useState([]);
   const [values, setValues] = useState([0, 0]);
 
@@ -21,12 +44,6 @@ function Cart() {
     minimumFractionDigits: 0,
   });
 
-  // const values = productData.map((e) => e.unit_price) || 0;
-
-  // if (values !== []) {
-  //   // const sum = values.reduce((a, b) => a + b);
-  //   setSuma(sum);
-  // }
   const suma = values?.reduce((a, b) => a + b) || 0;
 
   const subtotalCurrency = formatterPeso.format(suma / 1.19);
@@ -36,7 +53,9 @@ function Cart() {
   return (
     <div className="cart">
       {productData ? (
-        productData?.map((e) => <CartCard key={`cart${e.id}`} product={e} />)
+        productData?.map((e) => (
+          <CartCard key={`cart${e.productId}`} product={e} />
+        ))
       ) : (
         <div className="cart__text">There are no products, Add some</div>
       )}
@@ -53,8 +72,8 @@ function Cart() {
         <div className="cart__totals__text">Total</div>
         <div>{totalCurrency}</div>
       </div>
-      <button type="button" className="cart__pay_btn">
-        Pay
+      <button type="button" className="cart__pay_btn" onClick={payCart}>
+        Order
       </button>
     </div>
   );
