@@ -7,7 +7,6 @@ import CartCard from './CartCard/CartCard';
 
 function Cart() {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
 
   const payCart = async () => {
     const productsToken = JSON.parse(localStorage.getItem('products'));
@@ -24,6 +23,7 @@ function Cart() {
       });
     } else {
       navigate('/orderresume');
+      window.scroll(0, 0);
     }
   };
 

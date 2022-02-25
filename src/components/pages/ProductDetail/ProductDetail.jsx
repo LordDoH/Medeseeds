@@ -9,7 +9,6 @@ import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import Allied from '../../layout/Allied/Allied';
-// import Termo from '../../../assets/images/Termo.png';
 import SetProducts from '../../layout/setProducts/SetProducts';
 import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
 import UpsideDock from '../../layout/UpsideDock/UpsideDock';
@@ -18,6 +17,7 @@ import Spinner from '../../layout/Spinner/Spinner';
 const GET_PRODUCT_BY_ID = gql`
   query getProduct($getProductId: ID!) {
     getProduct(id: $getProductId) {
+      id
       title
       description
       brand

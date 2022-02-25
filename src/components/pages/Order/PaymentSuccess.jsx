@@ -54,15 +54,19 @@ function PaymentSuccess() {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'Paid',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'Paid',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
         const products = localStorage.removeItem('products');
         dispatch(actions.loadedCart(products));
       }

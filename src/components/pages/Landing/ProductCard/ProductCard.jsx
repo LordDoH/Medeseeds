@@ -77,6 +77,7 @@ function ProductCard({ product }) {
   const linkto = () => {
     dispatch(actions.loadedRoute('/categories/product'));
     navigate(`/categories/${data.getCategoryTitleByProduct}/${product.id}`);
+    window.scroll(0, 0);
   };
   return (
     <div className="product_card">

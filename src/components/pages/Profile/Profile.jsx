@@ -57,18 +57,22 @@ function Profile() {
   const [getOrders] = useLazyQuery(ORDERS_BY_USER);
 
   useEffect(async () => {
-    await updateOrders();
-    await getOrders();
+    try {
+      await updateOrders();
+      await getOrders();
+    } catch (e) {
+      // console.log(e);
+    }
   }, []);
 
   const onClick = async () => {
     const getorders = await getOrders();
+    setOrders(getorders.data.getOrdersByUser);
     if (!active) {
       setActive(true);
     } else {
       setActive(false);
     }
-    setOrders(getorders.data.getOrdersByUser);
   };
 
   const user = useSelector((state) => state.currentUser);
@@ -198,7 +202,7 @@ function Profile() {
                     colSpan={4}
                     className="profile__user_card__table__body__data"
                   >
-                    You have no orders, make your first order now 🛒
+                    You have no orders, make your first order nows 🛒
                   </td>
                 </tr>
               )}

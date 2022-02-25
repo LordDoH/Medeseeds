@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useLazyQuery, useMutation, gql } from '@apollo/client';
 import { useSelector, useDispatch } from 'react-redux';
 import { BiImageAdd } from 'react-icons/bi';
@@ -66,8 +66,6 @@ function EditProfile() {
 
   const user = useSelector((state) => state.currentUser);
 
-  useEffect(() => {}, []);
-
   const [image, setImage] = useState({ field: user.photo, check: null });
 
   const [counter, setCounter] = useState(0);
@@ -75,11 +73,15 @@ function EditProfile() {
   const onChangeFile = async (e) => {
     e.preventDefault();
     if (counter > 0) {
-      await deletePhoto({
-        variables: {
-          photo: image.field,
-        },
-      });
+      try {
+        await deletePhoto({
+          variables: {
+            photo: image.field,
+          },
+        });
+      } catch (error) {
+        // console.log(error)
+      }
     }
 
     const formData = new FormData();
@@ -185,6 +187,8 @@ function EditProfile() {
             updateUserId: user.id,
           },
         });
+        await localStorage.setItem('token', userUp.data.updateUser.token);
+
         Swal.fire({
           title: 'Success!',
           text: 'Your changes were successful',
@@ -194,10 +198,9 @@ function EditProfile() {
           icon: 'success',
           imageWidth: 70,
         });
-        localStorage.setItem('token', userUp.data.updateUser.token);
         const response = await getUserByToken();
         await dispatch(actions.obtainedUser(response.data.getUserByToken));
-        return userUp;
+        return 'ok';
       }
     }
     if (
@@ -223,6 +226,8 @@ function EditProfile() {
           updateUserId: user.id,
         },
       });
+      await localStorage.setItem('token', userUp.data.updateUser.token);
+
       Swal.fire({
         title: 'Success!',
         text: 'Your changes were successful',
@@ -233,10 +238,9 @@ function EditProfile() {
         imageWidth: 70,
       });
 
-      localStorage.setItem('token', userUp.data.updateUser.token);
       const response = await getUserByToken();
       await dispatch(actions.obtainedUser(response.data.getUserByToken));
-      return userUp;
+      return 'ok';
     }
     Swal.fire({
       title: 'Error!',

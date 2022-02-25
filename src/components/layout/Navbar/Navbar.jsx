@@ -38,6 +38,7 @@ function Navbar() {
   const onClick = async () => {
     setMov(!mov);
     dispatch(actions.loadedRoute(``));
+    window.scroll(0, 0);
   };
 
   // extract userAuthenticated
@@ -119,7 +120,10 @@ function Navbar() {
     };
   }, [isActive]);
 
-  const onClick2 = () => setIsActive(!isActive);
+  const onClick2 = () => {
+    setIsActive(!isActive);
+    window.scroll(0, 0);
+  };
 
   return (
     <div>

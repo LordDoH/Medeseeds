@@ -16,7 +16,7 @@ function CartCard({ product }) {
     const productsToken = JSON.parse(localStorage.getItem('products'));
     if (productsToken) {
       const productn = productsToken.find(getProduct);
-      setQuantity(productn.quantity);
+      setQuantity(productn?.quantity);
     }
   }, [cartState]);
 

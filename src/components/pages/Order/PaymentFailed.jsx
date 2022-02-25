@@ -45,15 +45,19 @@ function PaymentFailed() {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'Failed',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'Failed',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
       }
     }
   }, [orders.loading]);

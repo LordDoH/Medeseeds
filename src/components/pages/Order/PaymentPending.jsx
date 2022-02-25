@@ -48,15 +48,19 @@ function PaymentPending() {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'InProcess',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'InProcess',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
         const products = localStorage.removeItem('products');
         dispatch(actions.loadedCart(products));
       }
