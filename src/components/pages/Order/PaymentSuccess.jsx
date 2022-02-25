@@ -7,6 +7,8 @@ import Allied from '../../layout/Allied/Allied';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import './PaymentSuccess.scss';
 import actions from '../../../store/action';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const ORDERS_BY_USER = gql`
   query getOrdersByUser {
@@ -41,20 +43,30 @@ function PaymentSuccess() {
   const mpStatus = urlParams.get('status');
   const mpMethod = urlParams.get('payment_type');
 
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  });
+
   useEffect(async () => {
     if (!mpId || !localStorage.getItem('products')) {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'Paid',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'Paid',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
         const products = localStorage.removeItem('products');
         dispatch(actions.loadedCart(products));
       }
@@ -96,7 +108,7 @@ function PaymentSuccess() {
           <tr className="payment_success__table__row">
             <td className="payment_success__table__row__title">Total paid</td>
             <td className="payment_success__table__row__data">
-              {orders.data?.getOrdersByUser[0].total}
+              {formatterPeso.format(orders.data?.getOrdersByUser[0].total)}
             </td>
           </tr>
           <tr className="payment_success__table__row">
@@ -112,6 +124,8 @@ function PaymentSuccess() {
       </button>
       <HelpSlice />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

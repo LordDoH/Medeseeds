@@ -9,12 +9,15 @@ import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import Allied from '../../layout/Allied/Allied';
-// import Termo from '../../../assets/images/Termo.png';
 import SetProducts from '../../layout/setProducts/SetProducts';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
+import Spinner from '../../layout/Spinner/Spinner';
 
 const GET_PRODUCT_BY_ID = gql`
   query getProduct($getProductId: ID!) {
     getProduct(id: $getProductId) {
+      id
       title
       description
       brand
@@ -41,7 +44,7 @@ const GET_PRODUCTS_LATEST = gql`
 function ProductDetail() {
   const { productId } = useParams();
 
-  const { data } = useQuery(GET_PRODUCT_BY_ID, {
+  const { data, loading } = useQuery(GET_PRODUCT_BY_ID, {
     variables: {
       getProductId: productId,
     },
@@ -132,7 +135,7 @@ function ProductDetail() {
 
   return (
     <div className="product_detail">
-      {productData ? (
+      {!loading ? (
         <div className="product_detail__card">
           <div className="product_detail__card__images">
             <img
@@ -207,16 +210,23 @@ function ProductDetail() {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <Spinner />
+      )}
       <HelpSlice />
-      <div className="product_detail__related_title"> Related </div>
+
       {!productos.loading ? (
-        <SetProducts products={productos?.data?.getLatestProducts} />
+        <>
+          <div className="product_detail__related_title"> Related </div>
+          <SetProducts products={productos?.data?.getLatestProducts} />
+        </>
       ) : null}
 
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

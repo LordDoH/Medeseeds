@@ -1,7 +1,5 @@
 import React from 'react';
 import './Landing.scss';
-import { IoIosArrowUp } from 'react-icons/io';
-import { BsWhatsapp } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import { useDispatch } from 'react-redux';
@@ -13,6 +11,8 @@ import Slide1 from '../../../assets/images/Slide1.jpg';
 import Allied from '../../layout/Allied/Allied';
 import Spinner from '../../layout/Spinner/Spinner';
 import actions from '../../../store/action';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const GET_CATEGORIES = gql`
   query getCategories {
@@ -39,10 +39,6 @@ const GET_PRODUCTS = gql`
 `;
 
 function Landing() {
-  const scrollUp = () => {
-    window.scroll(0, 0);
-  };
-
   const categories = useQuery(GET_CATEGORIES);
   const products = useQuery(GET_PRODUCTS);
 
@@ -66,9 +62,6 @@ function Landing() {
         'Awesome introduction for this blog post; here will be something you would like to learn in the future or maybe right now, at this precise moment, something valuable to learn.',
     },
   ];
-
-  const goWhatsapp =
-    'https://wa.me/573015317547/?text=Saludos,%20quiero%20información%20adicional%20de%20los%20productos';
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -137,12 +130,8 @@ function Landing() {
           >
             More
           </button>
-          {/* eslint-disable-next-line */}
-          <a className="landing__whatsapp" href={goWhatsapp}>
-            <BsWhatsapp />
-          </a>
-          {/* eslint-disable-next-line */}
-          <div className="landing__scroll_up" onClick={scrollUp}><IoIosArrowUp /></div>
+          <WhatsappDock />
+          <UpsideDock />
           <Allied />
         </>
       )}

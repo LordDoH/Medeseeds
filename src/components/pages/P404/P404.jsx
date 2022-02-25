@@ -13,6 +13,7 @@ function P404() {
   const linkto = () => {
     dispatch(actions.loadedRoute(`/`));
     navigate(`/`);
+    window.scroll(0, 0);
   };
 
   return (

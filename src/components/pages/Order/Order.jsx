@@ -12,6 +12,8 @@ import './Order.scss';
 import Allied from '../../layout/Allied/Allied';
 import Input from '../../layout/Input/Input';
 import useMercadoPago from '../../../hooks/useMercadoPago';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const NEW_PAYMENT = gql`
   mutation newPayment($input: OrderInput) {
@@ -147,7 +149,7 @@ function Order() {
         errorText="Please insert a valid address"
         inputParameters={parameters.address}
       />
-      <div className="order__input">Telephone</div>
+      <div className="order__input">Phone</div>
       <Input
         state={telephone}
         changeState={setTelephone}
@@ -165,6 +167,8 @@ function Order() {
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

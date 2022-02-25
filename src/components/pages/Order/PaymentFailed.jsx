@@ -5,6 +5,8 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import Allied from '../../layout/Allied/Allied';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import './PaymentFailed.scss';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const ORDERS_BY_USER = gql`
   query getOrdersByUser {
@@ -43,15 +45,19 @@ function PaymentFailed() {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'Failed',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'Failed',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
       }
     }
   }, [orders.loading]);
@@ -88,7 +94,7 @@ function PaymentFailed() {
           </tr>
           <tr className="payment_failed__table__row">
             <td className="payment_failed__table__row__title">Total paid</td>
-            <td className="payment_failed__table__row__data">0</td>
+            <td className="payment_failed__table__row__data">$ 0</td>
           </tr>
           <tr className="payment_failed__table__row">
             <td className="payment_failed__table__row__title">Status</td>
@@ -101,6 +107,8 @@ function PaymentFailed() {
       </button>
       <HelpSlice />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

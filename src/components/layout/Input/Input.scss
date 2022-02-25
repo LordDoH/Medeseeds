@@ -8,7 +8,7 @@
     position: relative;
     z-index: 3;
     &__box{
-      font-family: $secondary-font;
+      font-family: $primary-font;
       font-size: 1.8rem;
       width: 100%;
       background: rgba($sucess-color, 0.25);
@@ -22,6 +22,9 @@
         border: 2px solid $secondary-color;
         outline: none;
         box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+      }
+      &::placeholder{
+        font-size: 1.4rem;
       }
       &.error{
         border: 2px solid $alert-color !important;

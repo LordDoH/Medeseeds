@@ -1,0 +1,216 @@
+@import '../../../scss/main';
+
+.edit_profile{
+  padding-top: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $dark-color;
+  position: relative;
+  &__user_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 30px;
+    background-color: $light-color;
+    border-radius: 20px;
+    position: relative;
+    &__change_pwd{
+      display: none;
+      &__label{
+        font-family: $secondary-font;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        color: $boring-color;
+        padding: 5px 0px;
+      }
+      &.active{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &__save_btn{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      width: 120px;
+      font-size: 1.6rem;
+      font-family: $secondary-font;
+      font-weight: 700;
+      border: none;
+      background-color: $dark-color;
+      color: $light-color;
+      border-radius: 5px;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+      margin-top: 20px;
+      cursor: pointer;
+      &:hover{
+        box-shadow: none;
+      }
+    }
+    &__photo{
+      position: absolute;
+      top: -50px;
+      & input[id='comPhoto'] {
+        display: none;
+      }
+      & label[for='comPhoto'] {
+        min-width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 6px 0px;
+        margin-top: 10px;
+        position: relative;
+        & div{
+          cursor: pointer;
+          font-size: 2rem;
+          position: absolute;
+          top: -42px;
+          right: 5px;
+          display: flex;
+          align-items: center;
+          color: rgba($light-color,0.8);
+          background-color: rgba($dark-color,0.5);
+          &:hover{
+            background-color: rgba($dark-color,1);
+          }
+          border-radius: 100px;
+          padding: 5px;
+        }
+      }
+      & img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50px;
+      }
+    }
+    &__role{
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      font-family: $secondary-font;
+      color: $boring-color;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+    }
+    &__info{
+      width: 100%;
+      padding: 45px 0px 0 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      &__col{
+        display: flex;
+        flex-direction: column;
+        &__data{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          &__title{
+            font-family: $secondary-font;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: $boring-color;
+            padding: 5px 0px;
+          }
+          &__description{
+            font-family: $primary-font;
+            font-size: 2rem;
+            padding: 2px 0px;
+          }
+          &__change_btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 150px;
+            font-size: 1.4rem;
+            font-family: $secondary-font;
+            font-weight: 700;
+            border: none;
+            background-color: $dark-color;
+            color: $light-color;
+            border-radius: 5px;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+            margin: 5px 0;
+            cursor: pointer;
+            &:hover{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__title{
+    font-family: $primary-font;
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .edit_profile{
+    padding-top: 250px;
+    &__user_card {
+      padding-top: 90px;
+      width: 70%;
+      max-width: 800px;
+      &__photo{
+        top: -100px;
+        & label[for='comPhoto'] {
+          & div{
+            font-size: 4rem;
+            top: -65px;
+            right: 10px;
+          }
+        }
+        & img {
+          width: 200px;
+          height: 200px;
+          border-radius: 100px;
+        }
+      }
+      &__change_pwd{
+        &__label{
+          font-size: 1.4rem;
+          padding: 10px 0px;
+        }
+      }
+      &__role{
+        font-size: 1.6rem;
+      }
+      &__order{
+        font-size: 2.5rem;
+      }
+      &__info{
+        flex-direction: row;
+        justify-content: space-around;
+        padding-bottom: 30px;
+        &__col{
+          &__data{
+            &__title{
+              font-size: 1.4rem;
+              padding: 10px 0px;
+            }
+            &__description{
+              font-size: 2.5rem;
+              padding: 5px 0px;
+            }
+            &__change_btn{
+              height: 35px;
+              font-size: 1.6rem;
+              
+            }
+          }
+        }
+      }
+    }
+  } 
+}

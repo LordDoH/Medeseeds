@@ -5,7 +5,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 function LoginBtn() {
   const { loginWithRedirect, logout } = useAuth0();
 
-  // logout arriba y se debe pasar la propiedad returnTo
   return (
     <div>
       <button

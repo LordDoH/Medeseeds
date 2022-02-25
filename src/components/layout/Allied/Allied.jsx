@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 import BranchCard from '../../pages/Landing/BranchCard/BranchCard';
-// import Topcrop from '../../../assets/images/Topcrop.png';
 import './Allied.scss';
 
 const GET_BRANDS = gql`
@@ -12,17 +11,6 @@ const GET_BRANDS = gql`
     }
   }
 `;
-
-// const fakeBranchData = [
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-//   { image: Topcrop },
-// ];
 
 function Allied() {
   const { data, loading } = useQuery(GET_BRANDS);

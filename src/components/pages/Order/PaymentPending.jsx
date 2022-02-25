@@ -7,6 +7,8 @@ import Allied from '../../layout/Allied/Allied';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import './PaymentPending.scss';
 import actions from '../../../store/action';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const ORDERS_BY_USER = gql`
   query getOrdersByUser {
@@ -46,20 +48,30 @@ function PaymentPending() {
       navigate('/');
     } else if (!orders.data?.getOrdersByUser[0].mercadoPagoId) {
       if (!orders.loading) {
-        await updateOrder({
-          variables: {
-            input: {
-              mercadoPagoId: mpId.toString(),
-              status: 'InProcess',
+        try {
+          await updateOrder({
+            variables: {
+              input: {
+                mercadoPagoId: mpId.toString(),
+                status: 'InProcess',
+              },
+              updateOrderId: orders.data?.getOrdersByUser[0].id,
             },
-            updateOrderId: orders.data?.getOrdersByUser[0].id,
-          },
-        });
+          });
+        } catch (e) {
+          // console.log(e);
+        }
         const products = localStorage.removeItem('products');
         dispatch(actions.loadedCart(products));
       }
     }
   }, [orders.loading]);
+
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  });
 
   return (
     <div className="payment_pending">
@@ -97,7 +109,7 @@ function PaymentPending() {
           <tr className="payment_pending__table__row">
             <td className="payment_pending__table__row__title">Total paid</td>
             <td className="payment_pending__table__row__data">
-              {orders.data?.getOrdersByUser[0].total}
+              {formatterPeso.format(orders.data?.getOrdersByUser[0].total)}
             </td>
           </tr>
           <tr className="payment_pending__table__row">
@@ -113,6 +125,8 @@ function PaymentPending() {
       </button>
       <HelpSlice />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }
