@@ -19,6 +19,7 @@ import EditProfile from '../components/pages/EditProfile/EditProfile';
 import About from '../components/pages/About/About';
 import Posts from '../components/pages/Posts/Posts';
 import Post from '../components/pages/Post/PostUnique';
+import CreateProduct from '../components/pages/CreateProduct/CreateProduct';
 
 function Router() {
   return (
@@ -40,7 +41,10 @@ function Router() {
         <Route path="/categories/create" element={<Categories />} />
         <Route path="/categories/edit" element={<Categories />} />
         <Route path="/categories/:category" element={<Products />} />
-        <Route path="/categories/:category/create" element={<Products />} />
+        <Route
+          path="/categories/:category/create"
+          element={<CreateProduct />}
+        />
         <Route path="/categories/:category/edit" element={<Products />} />
         <Route
           path="/categories/:category/:productId"
