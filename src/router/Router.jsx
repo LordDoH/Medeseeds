@@ -16,6 +16,7 @@ import PaymentPending from '../components/pages/Order/PaymentPending';
 import PaymentFailed from '../components/pages/Order/PaymentFailed';
 import Profile from '../components/pages/Profile/Profile';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
+import About from '../components/pages/About/About';
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/about" element={<About />} />
         <Route path="/learn" element={<Landing />} />
         <Route path="/learn/:post" element={<Landing />} />
         <Route path="/orderresume" element={<Order />} />

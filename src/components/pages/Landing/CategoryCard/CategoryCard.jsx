@@ -11,6 +11,7 @@ function CategoryCard({ title, image }) {
   const linkto = () => {
     dispatch(actions.loadedRoute('/categories'));
     navigate(`/categories/${title}`);
+    window.scroll(0, 0);
   };
 
   return (
