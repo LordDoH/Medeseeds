@@ -5,6 +5,8 @@ import { useMutation, useQuery, gql } from '@apollo/client';
 import Allied from '../../layout/Allied/Allied';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import './PaymentFailed.scss';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const ORDERS_BY_USER = gql`
   query getOrdersByUser {
@@ -101,6 +103,8 @@ function PaymentFailed() {
       </button>
       <HelpSlice />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

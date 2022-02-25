@@ -7,6 +7,8 @@ import Allied from '../../layout/Allied/Allied';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import './PaymentPending.scss';
 import actions from '../../../store/action';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const ORDERS_BY_USER = gql`
   query getOrdersByUser {
@@ -119,6 +121,8 @@ function PaymentPending() {
       </button>
       <HelpSlice />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

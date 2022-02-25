@@ -8,6 +8,7 @@ function Input({
   inputType = 'text',
   label = '',
   inputName = '',
+  functionx = () => {},
   textPlaceholder = '',
   errorText = '',
   inputParameters,
@@ -23,6 +24,9 @@ function Input({
       } else {
         changeState({ ...state, check: 'false' });
       }
+    }
+    if (functionx) {
+      functionx();
     }
   };
 
@@ -46,6 +50,7 @@ function Input({
           value={state.field}
           onChange={onChange}
           onKeyUp={checking}
+          onBlur={checking}
           check={state.check}
         />
         {/* eslint-disable-next-line */}

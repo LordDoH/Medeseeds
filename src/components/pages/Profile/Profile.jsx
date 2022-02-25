@@ -1,9 +1,10 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
 import { useSelector } from 'react-redux';
 import { MdModeEdit } from 'react-icons/md';
 
 import './Profile.scss';
+import { useNavigate } from 'react-router-dom';
 import SetProducts from '../../layout/setProducts/SetProducts';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
 import Allied from '../../layout/Allied/Allied';
@@ -33,20 +34,50 @@ const ORDERS_BY_USER = gql`
   }
 `;
 
+const UPDATE_ORDERS = gql`
+  mutation {
+    updateOrders {
+      status
+      mercadoPagoId
+    }
+  }
+`;
+
 function Profile() {
-  const { data } = useQuery(GET_PRODUCTS_LIKED);
+  const products = useQuery(GET_PRODUCTS_LIKED);
 
-  const orders = useQuery(ORDERS_BY_USER);
+  const navigate = useNavigate();
 
-  console.log(orders);
+  const [active, setActive] = useState(false);
+
+  const [orders, setOrders] = useState();
+
+  const [updateOrders] = useMutation(UPDATE_ORDERS);
+
+  const [getOrders] = useLazyQuery(ORDERS_BY_USER);
+
+  useEffect(async () => {
+    await updateOrders();
+    await getOrders();
+  }, []);
+
+  const onClick = async () => {
+    const getorders = await getOrders();
+    if (!active) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+    setOrders(getorders.data.getOrdersByUser);
+  };
 
   const user = useSelector((state) => state.currentUser);
 
-  // const formatterPeso = new Intl.NumberFormat('es-CO', {
-  //   style: 'currency',
-  //   currency: 'COP',
-  //   minimumFractionDigits: 0,
-  // });
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0,
+  });
 
   return (
     <div className="profile">
@@ -55,7 +86,10 @@ function Profile() {
           <img src={user.photo} alt="" />
         </div>
         <div className="profile__user_card__role">{user.role}</div>
-        <div className="profile__user_card__icon">
+        <div
+          className="profile__user_card__icon"
+          onClick={() => navigate('/editprofile')}
+        >
           <MdModeEdit />
         </div>
         <div className="profile__user_card__info">
@@ -116,31 +150,66 @@ function Profile() {
           </div>
         </div>
         <div className="profile__user_card__order">Orders</div>
-        <table className="profile__user_card__table">
-          <thead className="profile__user_card__table__head">
-            <tr>
-              <th className="profile__user_card__table__head__title">Date</th>
-              <th className="profile__user_card__table__head__title">Id</th>
-              <th className="profile__user_card__table__head__title">Status</th>
-              <th className="profile__user_card__table__head__title">Paid</th>
-            </tr>
-          </thead>
-          <tbody className="profile__user_card__table__body">
-            <tr>
-              <td className="profile__user_card__table__body__data">Hoy</td>
-              <td className="profile__user_card__table__body__data">
-                1232132131
-              </td>
-              <td className="profile__user_card__table__body__data">Paid</td>
-              <td className="profile__user_card__table__body__data">45000</td>
-            </tr>
-          </tbody>
-        </table>
+        <button
+          type="button"
+          className="profile__user_card__order_btn"
+          onClick={onClick}
+        >
+          {!active ? 'View Orders' : 'Hide Orders'}
+        </button>
+        <div className={`profile__tableshow ${active ? 'active' : null}`}>
+          <table className="profile__user_card__table">
+            <thead className="profile__user_card__table__head">
+              <tr>
+                <th className="profile__user_card__table__head__title id">
+                  Date
+                </th>
+                <th className="profile__user_card__table__head__title">Id</th>
+                <th className="profile__user_card__table__head__title">
+                  Status
+                </th>
+                <th className="profile__user_card__table__head__title">Paid</th>
+              </tr>
+            </thead>
+            <tbody className="profile__user_card__table__body">
+              {orders ? (
+                orders?.map((e) => {
+                  const dateE = new Date(Number(e.created));
+                  return (
+                    <tr key={e.id}>
+                      <td className="profile__user_card__table__body__data id">
+                        {dateE.toDateString()}
+                      </td>
+                      <td className="profile__user_card__table__body__data">
+                        {e.id}
+                      </td>
+                      <td className="profile__user_card__table__body__data">
+                        {e.status}
+                      </td>
+                      <td className="profile__user_card__table__body__data">
+                        {formatterPeso.format(e.total)}
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className="profile__user_card__table__body__data"
+                  >
+                    You have no orders, make your first order now 🛒
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <HelpSlice />
       <div className="profile__title"> Liked Products </div>
-      <SetProducts products={data?.getLikedProducts} />
+      <SetProducts products={products.data?.getLikedProducts} />
       <Allied />
     </div>
   );

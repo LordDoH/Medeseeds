@@ -9,6 +9,8 @@ import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import './Products.scss';
 import Spinner from '../../layout/Spinner/Spinner';
 import Allied from '../../layout/Allied/Allied';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const GET_PRODUCTS_BY_CATEGORY = gql`
   query getProductsByCategory($categoryTitle: String) {
@@ -51,6 +53,8 @@ function Products() {
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

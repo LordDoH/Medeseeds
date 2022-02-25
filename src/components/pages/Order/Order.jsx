@@ -12,6 +12,8 @@ import './Order.scss';
 import Allied from '../../layout/Allied/Allied';
 import Input from '../../layout/Input/Input';
 import useMercadoPago from '../../../hooks/useMercadoPago';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const NEW_PAYMENT = gql`
   mutation newPayment($input: OrderInput) {
@@ -165,6 +167,8 @@ function Order() {
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

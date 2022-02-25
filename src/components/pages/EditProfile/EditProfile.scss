@@ -1,6 +1,6 @@
 @import '../../../scss/main';
 
-.profile{
+.edit_profile{
   padding-top: 220px;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,21 @@
     background-color: $light-color;
     border-radius: 20px;
     position: relative;
-    &__order_btn{
+    &__change_pwd{
+      display: none;
+      &__label{
+        font-family: $secondary-font;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        color: $boring-color;
+        padding: 5px 0px;
+      }
+      &.active{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    &__save_btn{
       display: flex;
       justify-content: center;
       align-items: center;
@@ -40,6 +54,34 @@
     &__photo{
       position: absolute;
       top: -50px;
+      & input[id='comPhoto'] {
+        display: none;
+      }
+      & label[for='comPhoto'] {
+        min-width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 6px 0px;
+        margin-top: 10px;
+        position: relative;
+        & div{
+          cursor: pointer;
+          font-size: 2rem;
+          position: absolute;
+          top: -42px;
+          right: 5px;
+          display: flex;
+          align-items: center;
+          color: rgba($light-color,0.8);
+          background-color: rgba($dark-color,0.5);
+          &:hover{
+            background-color: rgba($dark-color,1);
+          }
+          border-radius: 100px;
+          padding: 5px;
+        }
+      }
       & img {
         width: 100px;
         height: 100px;
@@ -56,58 +98,9 @@
       font-size: 1.2rem;
       text-transform: uppercase;
     }
-    &__icon{
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-family: $secondary-font;
-      color: $boring-color;
-      font-size: 3rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      &:hover{
-        color: $dark-color;
-      }
-    }
-    &__order{
-      padding-top: 20px;
-      font-family: $primary-font;
-      font-size: 2rem;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-    }
-    &__table{
-      margin-top: 30px;
-      text-align: center;
-      word-break: break-all;
-      width: 100%; 
-      &__head{
-        font-family: $primary-font;
-        font-size: 1.4rem;
-        &__title{
-          padding: 5px;
-          &.id{
-            display: none;
-          }
-        }
-      }
-      &__body{
-        font-family: $secondary-font;
-        font-size: 1rem;
-        
-        &__data{
-          padding: 5px;
-          width: 33.33%;
-          &.id{
-            display: none;
-          }
-        }
-      }
-
-    }
     &__info{
       width: 100%;
-      padding: 45px 0px 0 20px;
+      padding: 45px 0px 0 0px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -160,16 +153,10 @@
     font-weight: 700;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   }
-  &__tableshow{
-    display: none;
-    &.active{
-      display: block;
-    }
-  }
 }
 
 @media(min-width:$bp_tablet){
-  .profile{
+  .edit_profile{
     padding-top: 250px;
     &__user_card {
       padding-top: 90px;
@@ -177,10 +164,23 @@
       max-width: 800px;
       &__photo{
         top: -100px;
+        & label[for='comPhoto'] {
+          & div{
+            font-size: 4rem;
+            top: -65px;
+            right: 10px;
+          }
+        }
         & img {
           width: 200px;
           height: 200px;
           border-radius: 100px;
+        }
+      }
+      &__change_pwd{
+        &__label{
+          font-size: 1.4rem;
+          padding: 10px 0px;
         }
       }
       &__role{
@@ -188,28 +188,6 @@
       }
       &__order{
         font-size: 2.5rem;
-      }
-      &__table{
-        margin: 30px auto 0 auto;
-        &__head{
-          font-size: 2rem;
-          &__title{
-            &.id{
-              display: table-cell;
-            }
-          }
-        }
-        &__body{
-          font-size: 1.6rem;
-          &__data{
-            width: 24%;
-            &.id{
-              display: table-cell;
-              width: 28%;
-            }
-          }
-        }
-  
       }
       &__info{
         flex-direction: row;

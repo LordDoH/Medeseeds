@@ -6,6 +6,8 @@ import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
 import './Categories.scss';
 import Allied from '../../layout/Allied/Allied';
 import Spinner from '../../layout/Spinner/Spinner';
+import WhatsappDock from '../../layout/WhatsappDock/WhatsappDock';
+import UpsideDock from '../../layout/UpsideDock/UpsideDock';
 
 const GET_CATEGORIES = gql`
   query getCategories {
@@ -43,6 +45,8 @@ function Categories() {
       <DeliveryPolicy />
       <GuaranteePolicy />
       <Allied />
+      <WhatsappDock />
+      <UpsideDock />
     </div>
   );
 }

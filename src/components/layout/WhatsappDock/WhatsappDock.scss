@@ -1,0 +1,20 @@
+@import '../../../scss/main';
+
+.whatsappdock{
+  font-size: $primary-font-size;
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  color: $light-color;
+  border-radius: 27.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(#25CB55, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  &:hover{
+    background-color: rgba(#25CB55, 1);
+  }
+}

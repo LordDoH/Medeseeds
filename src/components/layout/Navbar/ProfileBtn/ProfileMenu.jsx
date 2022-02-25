@@ -51,7 +51,7 @@ function ProfileMenu({ authenticateUser }) {
           <div className="profile_menu__item__icon">
             <BsFillGearFill />
           </div>
-          <Link className="profile_menu__item__text" to="/config">
+          <Link className="profile_menu__item__text" to="/editprofile">
             Config
           </Link>
         </li>
