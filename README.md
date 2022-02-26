@@ -13,6 +13,10 @@ This is a project focused on giving another point of view about the Marihuana pl
 
 Note: if you are using yarn simply change the commands according to your package manager 😎
 
+## Design
+
+There is a prototype in Figma for this project, if you like you can see it [Here](https://www.figma.com/file/GIXBetPGYc2o9bHT3B9zyx/Medeseeds?node-id=0%3A1).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
