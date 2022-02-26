@@ -29,7 +29,7 @@ function Categories() {
   return (
     <div className="categories">
       <div className="categories__title">Categories</div>
-      {currentUser.role !== 'user' ? (
+      {currentUser.role === 'admin' || currentUser.role === 'sales' ? (
         <div className="categories__create">Create New</div>
       ) : null}
 
