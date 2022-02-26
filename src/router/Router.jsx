@@ -20,6 +20,7 @@ import About from '../components/pages/About/About';
 import Posts from '../components/pages/Posts/Posts';
 import Post from '../components/pages/Post/PostUnique';
 import CreateProduct from '../components/pages/CreateProduct/CreateProduct';
+import EditProduct from '../components/pages/EditProduct/EditProduct';
 
 function Router() {
   return (
@@ -45,7 +46,10 @@ function Router() {
           path="/categories/:category/create"
           element={<CreateProduct />}
         />
-        <Route path="/categories/:category/edit" element={<Products />} />
+        <Route
+          path="/categories/:category/edit/:Idproduct"
+          element={<EditProduct />}
+        />
         <Route
           path="/categories/:category/:productId"
           element={<ProductDetail />}

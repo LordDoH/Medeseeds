@@ -8,7 +8,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useSelector } from 'react-redux';
 import Input from '../../layout/Input/Input';
-import './CreateProduct.scss';
+import './EditProduct.scss';
 
 const DELETE_PICTURE = gql`
   mutation deletePhoto($photo: String) {
@@ -16,18 +16,21 @@ const DELETE_PICTURE = gql`
   }
 `;
 
-const NEW_PRODUCT = gql`
-  mutation newProduct($input: ProductInput, $title: String) {
-    newProduct(input: $input, title: $title) {
+const UPDATE_PRODUCT = gql`
+  mutation updateProduct($updateProductId: ID!, $input: ProductInput) {
+    updateProduct(id: $updateProductId, input: $input) {
       id
     }
   }
 `;
 
-function CreateProduct() {
+function EditProduct() {
+  const currentProduct = useSelector((state) => state.editProduct);
   const currentUser = useSelector((state) => state.currentUser);
 
   const navigate = useNavigate();
+
+  const { category, Idproduct } = useParams();
 
   useEffect(() => {
     if (currentUser.role === 'user') {
@@ -36,13 +39,20 @@ function CreateProduct() {
   }, []);
 
   const [deletePhoto] = useMutation(DELETE_PICTURE);
-  const [newProduct] = useMutation(NEW_PRODUCT);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
-  const { category } = useParams();
-
-  const [image1, setImage1] = useState({ field: '', check: null });
-  const [image2, setImage2] = useState({ field: '', check: null });
-  const [image3, setImage3] = useState({ field: '', check: null });
+  const [image1, setImage1] = useState({
+    field: currentProduct.image,
+    check: null,
+  });
+  const [image2, setImage2] = useState({
+    field: currentProduct.secondaryImages[0],
+    check: null,
+  });
+  const [image3, setImage3] = useState({
+    field: currentProduct.secondaryImages[1],
+    check: null,
+  });
 
   const [counter1, setCounter1] = useState(0);
   const [counter2, setCounter2] = useState(0);
@@ -130,19 +140,19 @@ function CreateProduct() {
   };
 
   const [title, setTitle] = useState({
-    field: '',
+    field: currentProduct.title,
     check: null,
   });
   const [brand, setBrand] = useState({
-    field: '',
+    field: currentProduct.brand,
     check: null,
   });
   const [description, setDescription] = useState({
-    field: '',
+    field: currentProduct.description,
     check: null,
   });
   const [price, setPrice] = useState({
-    field: '',
+    field: currentProduct.price,
     check: null,
   });
   const [stock, setStock] = useState({
@@ -151,9 +161,9 @@ function CreateProduct() {
   });
 
   const parameters = {
-    title: /^.{4,30}$/,
+    title: /^.{4,50}$/,
     brand: /^.{4,20}$/,
-    description: /^.{20,150}$/,
+    description: /^.{20,1000}$/,
     price: /^[0-9]{3,10}$/,
     stock: /^[0-9]{1,5}$/,
   };
@@ -170,12 +180,9 @@ function CreateProduct() {
       brand.check === 'true' &&
       description.check === 'true' &&
       price.check === 'true' &&
-      stock.check === 'true' &&
-      image1.check === 'true' &&
-      image2.check === 'true' &&
-      image3.check === 'true'
+      stock.check === 'true'
     ) {
-      const response = await newProduct({
+      const response = await updateProduct({
         variables: {
           input: {
             title: title.field,
@@ -186,12 +193,12 @@ function CreateProduct() {
             price: Number(price.field),
             stock: Number(stock.field),
           },
-          title: category,
+          updateProductId: Idproduct,
         },
       });
       Swal.fire({
         title: 'Success!',
-        text: 'The product has been created successfully',
+        text: 'The product has been updated successfully',
         confirmButtonText: 'Great',
         timer: 4000,
         confirmButtonColor: '#739D38',
@@ -199,7 +206,7 @@ function CreateProduct() {
         imageWidth: 70,
       });
       setTimeout(() => {
-        navigate(`/categories/${category}/${response.data?.newProduct.id}`);
+        navigate(`/categories/${category}/${response.data?.updateProduct.id}`);
       }, 1500);
       window.scroll(0, 0);
     } else {
@@ -216,11 +223,11 @@ function CreateProduct() {
   };
 
   return (
-    <div className="create_product">
-      <div className="create_product__title">Create Product</div>
-      <div className="create_product__card">
-        <div className="create_product__card__input">
-          <div className="create_product__card__input__title">Title</div>
+    <div className="edit_product">
+      <div className="edit_product__title">Edit Product</div>
+      <div className="edit_product__card">
+        <div className="edit_product__card__input">
+          <div className="edit_product__card__input__title">Title</div>
           <Input
             state={title}
             changeState={setTitle}
@@ -232,8 +239,8 @@ function CreateProduct() {
             inputParameters={parameters.title}
           />
         </div>
-        <div className="create_product__card__input">
-          <div className="create_product__card__input__title">Brand</div>
+        <div className="edit_product__card__input">
+          <div className="edit_product__card__input__title">Brand</div>
           <Input
             state={brand}
             changeState={setBrand}
@@ -245,8 +252,8 @@ function CreateProduct() {
             inputParameters={parameters.brand}
           />
         </div>
-        <div className="create_product__card__input">
-          <div className="create_product__card__input__title">Description</div>
+        <div className="edit_product__card__input">
+          <div className="edit_product__card__input__title">Description</div>
           <Input
             state={description}
             changeState={setDescription}
@@ -258,8 +265,8 @@ function CreateProduct() {
             inputParameters={parameters.description}
           />
         </div>
-        <div className="create_product__card__input">
-          <div className="create_product__card__input__title">Price</div>
+        <div className="edit_product__card__input">
+          <div className="edit_product__card__input__title">Price</div>
           <Input
             state={price}
             changeState={setPrice}
@@ -271,8 +278,8 @@ function CreateProduct() {
             inputParameters={parameters.price}
           />
         </div>
-        <div className="create_product__card__input">
-          <div className="create_product__card__input__title">Stock</div>
+        <div className="edit_product__card__input">
+          <div className="edit_product__card__input__title">Stock</div>
           <Input
             state={stock}
             changeState={setStock}
@@ -284,9 +291,9 @@ function CreateProduct() {
             inputParameters={parameters.stock}
           />
         </div>
-        <div className="create_product__card__input__images">
-          <div className="create_product__card__input__images__card">
-            <div className="create_product__card__input__images__card__title">
+        <div className="edit_product__card__input__images">
+          <div className="edit_product__card__input__images__card">
+            <div className="edit_product__card__input__images__card__title">
               Main Image
             </div>
             <label htmlFor="comPhoto1" onChange={onChangeFile1}>
@@ -298,7 +305,7 @@ function CreateProduct() {
                 multiple
               />
               <div
-                className={`create_product__card__input__images__card__icon ${
+                className={`edit_product__card__input__images__card__icon ${
                   image1.field !== '' ? 'checkimg' : null
                 }`}
               >
@@ -310,8 +317,8 @@ function CreateProduct() {
               </div>
             </label>
           </div>
-          <div className="create_product__card__input__images__card">
-            <div className="create_product__card__input__images__card__title">
+          <div className="edit_product__card__input__images__card">
+            <div className="edit_product__card__input__images__card__title">
               Secondary Image
             </div>
             <label htmlFor="comPhoto2" onChange={onChangeFile2}>
@@ -323,7 +330,7 @@ function CreateProduct() {
                 multiple
               />
               <div
-                className={`create_product__card__input__images__card__icon ${
+                className={`edit_product__card__input__images__card__icon ${
                   image2.field !== '' ? 'checkimg' : null
                 }`}
               >
@@ -335,8 +342,8 @@ function CreateProduct() {
               </div>
             </label>
           </div>
-          <div className="create_product__card__input__images__card">
-            <div className="create_product__card__input__images__card__title">
+          <div className="edit_product__card__input__images__card">
+            <div className="edit_product__card__input__images__card__title">
               Secondary Image
             </div>
             <label htmlFor="comPhoto3" onChange={onChangeFile3}>
@@ -348,7 +355,7 @@ function CreateProduct() {
                 multiple
               />
               <div
-                className={`create_product__card__input__images__card__icon ${
+                className={`edit_product__card__input__images__card__icon ${
                   image3.field !== '' ? 'checkimg' : null
                 }`}
               >
@@ -362,7 +369,7 @@ function CreateProduct() {
           </div>
         </div>
       </div>
-      <div className="create_product__title">Preview</div>
+      <div className="edit_product__title">Preview</div>
       <div className="product_detail__card">
         <div className="product_detail__card__images">
           <img
@@ -429,7 +436,7 @@ function CreateProduct() {
       </div>
       <button
         type="button"
-        className="create_product__save_btn"
+        className="edit_product__save_btn"
         onClick={saveProduct}
       >
         Save Product
@@ -438,4 +445,4 @@ function CreateProduct() {
   );
 }
 
-export default CreateProduct;
+export default EditProduct;
