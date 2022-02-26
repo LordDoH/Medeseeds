@@ -9,7 +9,8 @@
         "plugin:react/recommended",
         "airbnb",
         "plugin:jsx-a11y/recommended",
-        "prettier"
+        "prettier",
+        "plugin:cypress/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -21,7 +22,8 @@
     "plugins": [
         "react",
         "prettier",
-        "jest"
+        "jest",
+        "cypress"
     ],
     "rules": {
         "prettier/prettier" : "error",

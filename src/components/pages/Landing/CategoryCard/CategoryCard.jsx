@@ -15,7 +15,7 @@ function CategoryCard({ title, image }) {
   };
 
   return (
-    <div className="category_card" onClick={linkto}>
+    <div className="category_card" onClick={linkto} data-test="top-category">
       <img src={image} alt="category_image" className="category_card__img" />
       <div className="category_card__title">{title}</div>
     </div>
