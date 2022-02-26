@@ -16,6 +16,11 @@ import PaymentPending from '../components/pages/Order/PaymentPending';
 import PaymentFailed from '../components/pages/Order/PaymentFailed';
 import Profile from '../components/pages/Profile/Profile';
 import EditProfile from '../components/pages/EditProfile/EditProfile';
+import About from '../components/pages/About/About';
+import Posts from '../components/pages/Posts/Posts';
+import Post from '../components/pages/Post/PostUnique';
+import CreateProduct from '../components/pages/CreateProduct/CreateProduct';
+import EditProduct from '../components/pages/EditProduct/EditProduct';
 
 function Router() {
   return (
@@ -26,8 +31,9 @@ function Router() {
         <Route path="/auth" element={<Auth />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editprofile" element={<EditProfile />} />
-        <Route path="/learn" element={<Landing />} />
-        <Route path="/learn/:post" element={<Landing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/learn" element={<Posts />} />
+        <Route path="/learn/:post" element={<Post />} />
         <Route path="/orderresume" element={<Order />} />
         <Route path="/orderresume/success" element={<PaymentSuccess />} />
         <Route path="/orderresume/pending" element={<PaymentPending />} />
@@ -36,8 +42,14 @@ function Router() {
         <Route path="/categories/create" element={<Categories />} />
         <Route path="/categories/edit" element={<Categories />} />
         <Route path="/categories/:category" element={<Products />} />
-        <Route path="/categories/:category/create" element={<Products />} />
-        <Route path="/categories/:category/edit" element={<Products />} />
+        <Route
+          path="/categories/:category/create"
+          element={<CreateProduct />}
+        />
+        <Route
+          path="/categories/:category/edit/:Idproduct"
+          element={<EditProduct />}
+        />
         <Route
           path="/categories/:category/:productId"
           element={<ProductDetail />}

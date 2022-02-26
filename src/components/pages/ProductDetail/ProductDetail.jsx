@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import actions from '../../../store/action';
 import './ProductDetail.scss';
 import HelpSlice from '../../layout/HelpSlice/HelpSlice';
@@ -41,14 +42,24 @@ const GET_PRODUCTS_LATEST = gql`
   }
 `;
 
+const DELETE_PRODUCT = gql`
+  mutation deleteProduct($deleteProductId: ID!) {
+    deleteProduct(id: $deleteProductId)
+  }
+`;
+
 function ProductDetail() {
-  const { productId } = useParams();
+  const { category, productId } = useParams();
 
   const { data, loading } = useQuery(GET_PRODUCT_BY_ID, {
     variables: {
       getProductId: productId,
     },
   });
+
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
+
+  const navigate = useNavigate();
 
   const productos = useQuery(GET_PRODUCTS_LATEST);
 
@@ -133,10 +144,55 @@ function ProductDetail() {
   // eslint-disable-next-line
   const priceCurrency = formatterPeso.format(productData?.price * quantity);
 
+  const currentUser = useSelector((state) => state.currentUser);
+
+  const editProduct = async () => {
+    await dispatch(actions.editedProduct(data.getProduct));
+    navigate(`/categories/${category}/edit/${productId}`);
+  };
+
+  const delProduct = async () => {
+    Swal.fire({
+      title: 'Please confirm!',
+      text: 'Do you want to delete this product?',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      confirmButtonColor: '#739D38',
+      icon: 'question',
+      imageWidth: 70,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct({
+          variables: {
+            deleteProductId: productId,
+          },
+        });
+        Swal.fire({
+          title: 'Success!',
+          text: 'The product has been deleted',
+          confirmButtonText: 'Great',
+          confirmButtonColor: '#739D38',
+          icon: 'success',
+          imageWidth: 70,
+        });
+        const datic = currentUser;
+        datic.loading = true;
+        navigate(`/categories/${category}/`);
+        window.location.reload();
+      }
+    });
+  };
+
   return (
     <div className="product_detail">
       {!loading ? (
         <div className="product_detail__card">
+          {currentUser.role !== 'user' ? (
+            <div className="product_detail__card__options">
+              <div onClick={editProduct}>Edit</div>
+              <div onClick={delProduct}>Delete</div>
+            </div>
+          ) : null}
           <div className="product_detail__card__images">
             <img
               src={mainImage}

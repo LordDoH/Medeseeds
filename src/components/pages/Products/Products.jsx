@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import ProductCard from '../Landing/ProductCard/ProductCard';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
@@ -32,9 +33,18 @@ function Products() {
     variables: { categoryTitle: category },
   });
 
+  const navigate = useNavigate();
+
+  const currentUser = useSelector((state) => state.currentUser);
+
   return (
     <div className="products">
       <div className="products__title">Products</div>
+      {currentUser.role !== 'user' ? (
+        <div className="products__create" onClick={() => navigate('create')}>
+          Create New
+        </div>
+      ) : null}
       {!products.loading ? (
         <div className="products__cards">
           {products.data.getProductsByCategory.map((e) => (

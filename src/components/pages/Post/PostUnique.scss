@@ -1,0 +1,65 @@
+@import '../../../scss/main.scss';
+
+.post_unique{
+  display: flex;
+  flex-direction: column;
+  padding-top: 150px;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+  &__information{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    &__image{
+      width: 300px;
+    }
+    &__desc{
+      font-family: $primary-font;
+      font-size: 2rem;
+      font-weight: 500;
+      max-width: 300px;
+      padding-bottom: 40px;
+      text-shadow: 1px 2px 4px rgba($dark-color, 0.25);
+    }
+  }
+  &__go_back_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 90px;
+    font-size: 1.6rem;
+    font-family: $secondary-font;
+    font-weight: 700;
+    border: none;
+    background-color: $dark-color;
+    color: $light-color;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 80px;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+    }
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .post_unique{
+    &__information{
+      flex-direction: row;
+      justify-content: space-around;
+      &__image{
+        width: 400px;
+      }
+      &__desc{
+        font-size: 2.5rem;
+        max-width: 400px;
+      }
+    }
+  }
+}

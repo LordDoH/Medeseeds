@@ -1,0 +1,94 @@
+@import '../../../scss/main.scss';
+
+.edit_product{
+  padding-top: 150px;
+  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  gap: 40px;
+  &__save_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 120px;
+    font-size: 1.6rem;
+    font-family: $secondary-font;
+    font-weight: 700;
+    border: none;
+    background-color: $dark-color;
+    color: $light-color;
+    border-radius: 5px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    cursor: pointer;
+    &:hover{
+      box-shadow: none;
+    }
+  }
+  &__title{
+    font-family: $primary-font;
+    font-size: 3rem;
+    font-weight: 700;
+    max-width: 300px;
+    text-shadow: 1px 2px 4px rgba($dark-color, 0.25);
+  }
+  &__card{
+    background-color: $light-color;
+    border-radius: 20px;
+    width: 80%;
+    padding: 20px;
+    &__input{
+      display: flex;
+      flex-direction: column;
+      &__title{
+        font-family: $secondary-font;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        color: $boring-color;
+        padding: 5px 0px;
+      }
+      &__images{
+        padding-top: 40px;
+        display: flex;
+        justify-content: space-around;
+        &__card{
+          text-align: center;
+          & label{
+            & input{
+              display: none;
+            }
+          }
+          &__title{
+            font-family: $secondary-font;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: $boring-color;
+            padding: 5px 0px;
+          }
+          &__icon{
+            font-size: 5rem;
+            text-align: center;
+            color: $warning-color;
+            cursor: pointer;
+            &.checkimg{
+              color: $sucess-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width:$bp_tablet){
+  .edit_product{
+    &__card{
+      width: 80%;
+      max-width: 800px;
+      padding: 40px;
+    }
+  }
+}

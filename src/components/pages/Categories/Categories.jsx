@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { useSelector } from 'react-redux';
 import CategoryCard2 from './CategoryCard/CategoryCard2';
 import DeliveryPolicy from '../../layout/DeliveryPolicy/DeliveryPolicy';
 import GuaranteePolicy from '../../layout/GuaranteePolicy/GuaranteePolicy';
@@ -23,9 +24,15 @@ const GET_CATEGORIES = gql`
 function Categories() {
   const categories = useQuery(GET_CATEGORIES);
 
+  const currentUser = useSelector((state) => state.currentUser);
+
   return (
     <div className="categories">
       <div className="categories__title">Categories</div>
+      {currentUser.role !== 'user' ? (
+        <div className="categories__create">Create New</div>
+      ) : null}
+
       {categories.loading ? (
         <Spinner />
       ) : (
