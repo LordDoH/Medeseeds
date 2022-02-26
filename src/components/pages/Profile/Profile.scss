@@ -107,13 +107,15 @@
     }
     &__info{
       width: 100%;
-      padding: 45px 0px 0 20px;
+      padding: 45px 0px 0 10px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       &__col{
+        width: 250px;
         display: flex;
         flex-direction: column;
+        margin: auto;
         &__data{
           display: flex;
           flex-direction: column;
@@ -127,7 +129,7 @@
           }
           &__description{
             font-family: $primary-font;
-            font-size: 2rem;
+            font-size: 1.8rem;
             padding: 2px 0px;
           }
           &__change_btn{
@@ -222,7 +224,7 @@
               padding: 10px 0px;
             }
             &__description{
-              font-size: 2.5rem;
+              font-size: 2.2rem;
               padding: 5px 0px;
             }
             &__change_btn{

@@ -80,7 +80,7 @@ function ProductCard({ product }) {
     window.scroll(0, 0);
   };
   return (
-    <div className="product_card">
+    <div className="product_card" data-test="top-products">
       <img
         src={product.image}
         alt="product_image"
@@ -92,7 +92,12 @@ function ProductCard({ product }) {
         {shortTitle}
       </div>
       <div className="product_card__price">{priceCurrency}</div>
-      <button type="button" className="product_card__btn" onClick={onClick}>
+      <button
+        type="button"
+        className="product_card__btn"
+        onClick={onClick}
+        data-test={`cartbtn${product.brand}`}
+      >
         Add to cart <MdOutlineShoppingCart />
       </button>
     </div>

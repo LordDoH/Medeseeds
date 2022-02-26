@@ -51,7 +51,7 @@ function Cart() {
   const totalCurrency = formatterPeso.format(suma);
 
   return (
-    <div className="cart">
+    <div className="cart" data-test="cart">
       {productData ? (
         productData?.map((e) => (
           <CartCard key={`cart${e.productId}`} product={e} />

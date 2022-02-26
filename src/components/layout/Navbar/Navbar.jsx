@@ -149,6 +149,7 @@ function Navbar() {
             </Link>
             <Link
               to="/learn"
+              data-test="learn"
               onClick={onClick}
               className={`nav_bar__elements__links__location ${active[2]}`}
             >
@@ -156,13 +157,14 @@ function Navbar() {
             </Link>
             <Link
               to="/about"
+              data-test="about"
               onClick={onClick}
               className={`nav_bar__elements__links__location ${active[3]}`}
             >
               ABOUT
             </Link>
             {/* eslint-disable-next-line */}
-          {!isAuth?(<div
+          {!isAuth?(<div data-test="loginbtn"
                 onClick={() => {
                   loginWithRedirect();
                 }}
@@ -175,7 +177,7 @@ function Navbar() {
               <ProfileButton currentUser={currentUser} />
             )}
             {/* eslint-disable-next-line */}
-            <div onClick={onClick2} className="nav_bar__elements__links__location">
+            <div onClick={onClick2} className="nav_bar__elements__links__location" data-test="cartbtn">
               <MdOutlineShoppingCart />
             </div>
           </div>
