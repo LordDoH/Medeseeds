@@ -40,7 +40,7 @@ function Products() {
   return (
     <div className="products">
       <div className="products__title">Products</div>
-      {currentUser.role !== 'user' ? (
+      {currentUser.role === 'admin' || currentUser.role === 'sales' ? (
         <div className="products__create" onClick={() => navigate('create')}>
           Create New
         </div>
