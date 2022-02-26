@@ -187,7 +187,7 @@ function ProductDetail() {
     <div className="product_detail">
       {!loading ? (
         <div className="product_detail__card">
-          {currentUser.role !== 'user' ? (
+          {currentUser.role === 'admin' || currentUser.role === 'sales' ? (
             <div className="product_detail__card__options">
               <div onClick={editProduct}>Edit</div>
               <div onClick={delProduct}>Delete</div>
